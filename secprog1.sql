@@ -16,30 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `accounts`
---
-
-DROP TABLE IF EXISTS `accounts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL,
-  `username` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `accounts`
---
-
-LOCK TABLES `accounts` WRITE;
-/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `card`
 --
 
@@ -50,8 +26,8 @@ CREATE TABLE `card` (
   `cardID` int(11) NOT NULL AUTO_INCREMENT,
   `cardNo` int(11) NOT NULL,
   `cardOwner` varchar(45) NOT NULL,
-  `cardExp` datetime NOT NULL,
-  `cardTypeID` int(11) NOT NULL,
+  `cardExp` varchar(45) NOT NULL,
+  `cardType` varchar(12) NOT NULL,
   PRIMARY KEY (`cardID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -63,29 +39,6 @@ CREATE TABLE `card` (
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `cardtype`
---
-
-DROP TABLE IF EXISTS `cardtype`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cardtype` (
-  `cardTypeID` int(11) NOT NULL AUTO_INCREMENT,
-  `cardTypeKind` varchar(45) NOT NULL,
-  PRIMARY KEY (`cardTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cardtype`
---
-
-LOCK TABLES `cardtype` WRITE;
-/*!40000 ALTER TABLE `cardtype` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cardtype` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -122,10 +75,10 @@ CREATE TABLE `product` (
   `prodID` int(11) NOT NULL AUTO_INCREMENT,
   `prodName` varchar(45) NOT NULL,
   `prodType` varchar(45) NOT NULL,
-  `prodDesc` varchar(45) NOT NULL,
+  `prodDesc` varchar(120) NOT NULL,
   `prodCount` int(11) NOT NULL,
   `prodPrice` float NOT NULL,
-  `prodRestockDateTime` datetime NOT NULL,
+  `prodRestockDateTime` varchar(45) NOT NULL,
   PRIMARY KEY (`prodID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -226,24 +179,24 @@ CREATE TABLE `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `userLast` varchar(45) NOT NULL,
   `userFirst` varchar(45) NOT NULL,
-  `userMI` varchar(45) NOT NULL,
+  `userMI` varchar(1) NOT NULL,
   `userUsername` varchar(45) NOT NULL,
   `userPassword` varchar(45) NOT NULL,
   `userEmail` varchar(45) NOT NULL,
   `userBillingAdd` varchar(45) DEFAULT NULL,
   `userDeliveryAdd` varchar(45) DEFAULT NULL,
-  `userStatus` binary(1) DEFAULT NULL,
-  `userTypeID` int(11) NOT NULL,
+  `userStatus` int(1) DEFAULT NULL,
+  `userTypeID` int(1) NOT NULL,
   `userAttemptCount` int(11) DEFAULT NULL,
-  `userAttemptDate` datetime DEFAULT NULL,
-  `userEditDateTime` datetime DEFAULT NULL,
+  `userAttemptDate` varchar(45) DEFAULT NULL,
+  `userEditDateTime` varchar(45) DEFAULT NULL,
   `userContactNum` varchar(11) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `userID_UNIQUE` (`userID`),
   UNIQUE KEY `userUsername_UNIQUE` (`userUsername`),
   UNIQUE KEY `userEmail_UNIQUE` (`userEmail`),
   UNIQUE KEY `userRefNo_UNIQUE` (`userRefNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,30 +205,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (NULL,1,'Bravante','Ralph Christian','S','ralphie','qwe','ralph_bravante@dlsu.edu.ph','2401 Taft Avenue Malate, Manila','1738 FettyWap Street Malate, Manila',NULL,1,NULL,NULL,NULL,'09359719727'),(NULL,2,'asdf','asdf','asdf','asdf','asdf','asdfasdf','asdfasdf','asdfasdf',NULL,2,NULL,NULL,NULL,'123123123'),(NULL,4,'asdff','qqweqwe','q','qweqwe','asd','qweqweqwe','qwqweaasd','qqweffsa',NULL,3,NULL,NULL,NULL,'11234221232');
+INSERT INTO `user` VALUES (NULL,5,'Bravante','Jason','S','jasonhenry','8cb2237d0679ca88db6464eac60da96345513964','jason@yahoo.com','0333 Batanes Street Sampaloc Manila','0333 Batanes Street Sampaloc Manila',NULL,1,0,NULL,NULL,'09359719727'),(NULL,7,'Javier','Doroty','S','doroti','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8','doroti@yahoo.com','0333 Batanes Street Sampaloc Manila','0333 Batanes Street Sampaloc Manila',NULL,2,0,'2017-02-22 00:24:58',NULL,'09359719727'),(NULL,8,'Cruz','Juan','A','iamjuan','b49a5780a99ea81284fc0746a78f84a30e4d5c73','juanandonly@gmail','gslkahlashldhalhdlad','ahdshldasldhasl',NULL,1,NULL,NULL,NULL,'ddddddddd'),(NULL,9,'x','x','x','x','11f6ad8ec52a2984abaafd7c3b516503785c2072','x@z','x','x',NULL,1,0,NULL,NULL,'x'),(NULL,10,'john','wwwww','d','qwe','da39a3ee5e6b4b0d3255bfef95601890afd80709','','','',NULL,1,NULL,NULL,NULL,''),(NULL,11,'john','doe','D','john','a51dda7c7ff50b61eaea0444371f4a6a9301e501','john@doe.com','john','john',NULL,1,0,NULL,NULL,'john'),(NULL,12,'ad','asd','s','asd','85136c79cbf9fe36bb9d05d0639c70c265c18d37','asdf@asdfaf.adfd','asdf','ssdf',0,1,0,'0000-00-00 00:00:00','0000-00-00 00:00:00','123123'),(NULL,16,'qqq','qqqq','q','qqq','c6efae9869218c6d45b92a3090bce129f27c070d','qqq@q','2312312312','2131231232312312',0,1,0,'0000-00-00 00:00:00','0000-00-00 00:00:00','09359719727');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `usercard`
---
-
-DROP TABLE IF EXISTS `usercard`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usercard` (
-  `userCardID` int(11) NOT NULL,
-  `userRefNo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usercard`
---
-
-LOCK TABLES `usercard` WRITE;
-/*!40000 ALTER TABLE `usercard` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usercard` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -289,7 +220,7 @@ CREATE TABLE `usertype` (
   `userTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `userTypeKind` varchar(45) NOT NULL,
   PRIMARY KEY (`userTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +229,7 @@ CREATE TABLE `usertype` (
 
 LOCK TABLES `usertype` WRITE;
 /*!40000 ALTER TABLE `usertype` DISABLE KEYS */;
-INSERT INTO `usertype` VALUES (1,'Customer'),(2,'Manager'),(3,'Admin');
+INSERT INTO `usertype` VALUES (1,'Customer'),(2,'Book Manager'),(3,'CD Manager'),(4,'DVD Manager'),(5,'Magazine Manager'),(6,'Admin');
 /*!40000 ALTER TABLE `usertype` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -311,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-01 13:11:13
+-- Dump completed on 2017-02-22  0:45:00
