@@ -311,7 +311,7 @@
                                         <div class="input-group">
                                             <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                             </div>
-                                            <input class="form-control" id="Username" type="text" placeholder="Username">
+                                            <input class="form-control" id="Username" name="Username" type="text" placeholder="Username">
                                         </div>
                                     </div>
                                 </div>
@@ -321,7 +321,7 @@
                                         <div class="input-group">
                                             <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                             </div>
-                                            <input class="form-control" id="Password" type="password" placeholder="Password">
+                                            <input class="form-control" id="Password" name="Password" type="password" placeholder="Password">
                                         </div>
                                     </div>
                                 </div>
