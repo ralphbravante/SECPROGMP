@@ -58,8 +58,12 @@ public class Register extends HttpServlet {
                         "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
             
                 
-            pst = connection.prepareStatement("insert into user (userLast, userFirst, userMI, userUsername, userPassword, userEmail, userBillingAdd, userDeliveryAdd, userStatus, userTypeID, userAttemptCount, userAttemptDate, userEditDateTime, userContactNum) \n" +
-"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pst = connection.prepareStatement("insert into user (userLast, userFirst, userMI, userUsername, userPassword, userEmail, userBillingAdd, userDeliveryAdd, userStatus, userTypeID,userEditDateTime, userContactNum) \n" +
+"values (?,?,?,?,?,?,?,?,?,?,?,?)");
+                java.util.Date dt = new java.util.Date();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTime = sdf.format(dt);
+            
                 pst.setString(1, LastName);
                 pst.setString(2, FirstName);
                 pst.setString(3, MI);
@@ -70,24 +74,12 @@ public class Register extends HttpServlet {
                 pst.setString(8, DelAdd);
                 pst.setInt(9, UserStatus);
                 pst.setInt(10, 1);
-                pst.setInt(11, UserAttemptCount);
-                pst.setString(12, UserAttemptDate);
-                pst.setString(13, UserEditDateTime);
-                pst.setString(14, MobileNum);
+                pst.setString(11, currentTime);
+                pst.setString(12, MobileNum);
                 pst.executeUpdate();    
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-            //DB.AddData("INSERT INTO `secprog`.`user` (`userLast`, `userFirst`, `userMI`, `userUsername`, `userPassword`, `userEmail`, `userBillingAdd`, `userDeliveryAdd`, `userContactNum`, `userTypeID`) VALUES ('" + LastName + "', '" + FirstName + "', '" + MI + "', '" + Username + "', '" + generatedPassword + "', '" + Email + "', '" + BillAdd + "', '" + DelAdd + "', '" + MobileNum + "', 1);");
+         
+           
         } catch (Exception ex) {
             ex.printStackTrace();
 
