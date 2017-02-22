@@ -175,7 +175,6 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `userRefNo` int(11) DEFAULT NULL,
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `userLast` varchar(45) NOT NULL,
   `userFirst` varchar(45) NOT NULL,
@@ -187,15 +186,12 @@ CREATE TABLE `user` (
   `userDeliveryAdd` varchar(45) DEFAULT NULL,
   `userStatus` int(1) DEFAULT NULL,
   `userTypeID` int(1) NOT NULL,
-  `userAttemptCount` int(11) DEFAULT NULL,
-  `userAttemptDate` varchar(45) DEFAULT NULL,
   `userEditDateTime` varchar(45) DEFAULT NULL,
   `userContactNum` varchar(11) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `userID_UNIQUE` (`userID`),
   UNIQUE KEY `userUsername_UNIQUE` (`userUsername`),
-  UNIQUE KEY `userEmail_UNIQUE` (`userEmail`),
-  UNIQUE KEY `userRefNo_UNIQUE` (`userRefNo`)
+  UNIQUE KEY `userEmail_UNIQUE` (`userEmail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,8 +201,34 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (NULL,5,'Bravante','Jason','S','jasonhenry','8cb2237d0679ca88db6464eac60da96345513964','jason@yahoo.com','0333 Batanes Street Sampaloc Manila','0333 Batanes Street Sampaloc Manila',NULL,1,0,NULL,NULL,'09359719727'),(NULL,7,'Javier','Doroty','S','doroti','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8','doroti@yahoo.com','0333 Batanes Street Sampaloc Manila','0333 Batanes Street Sampaloc Manila',NULL,2,0,'2017-02-22 00:24:58',NULL,'09359719727'),(NULL,8,'Cruz','Juan','A','iamjuan','b49a5780a99ea81284fc0746a78f84a30e4d5c73','juanandonly@gmail','gslkahlashldhalhdlad','ahdshldasldhasl',NULL,1,NULL,NULL,NULL,'ddddddddd'),(NULL,9,'x','x','x','x','11f6ad8ec52a2984abaafd7c3b516503785c2072','x@z','x','x',NULL,1,0,NULL,NULL,'x'),(NULL,10,'john','wwwww','d','qwe','da39a3ee5e6b4b0d3255bfef95601890afd80709','','','',NULL,1,NULL,NULL,NULL,''),(NULL,11,'john','doe','D','john','a51dda7c7ff50b61eaea0444371f4a6a9301e501','john@doe.com','john','john',NULL,1,0,NULL,NULL,'john'),(NULL,12,'ad','asd','s','asd','85136c79cbf9fe36bb9d05d0639c70c265c18d37','asdf@asdfaf.adfd','asdf','ssdf',0,1,0,'0000-00-00 00:00:00','0000-00-00 00:00:00','123123'),(NULL,16,'qqq','qqqq','q','qqq','c6efae9869218c6d45b92a3090bce129f27c070d','qqq@q','2312312312','2131231232312312',0,1,0,'0000-00-00 00:00:00','0000-00-00 00:00:00','09359719727');
+INSERT INTO `user` VALUES (5,'Bravante','Jason','S','jasonhenry','8cb2237d0679ca88db6464eac60da96345513964','jason@yahoo.com','0333 Batanes Street Sampaloc Manila','0333 Batanes Street Sampaloc Manila',NULL,1,NULL,'09359719727'),(7,'Javier','Doroty','S','doroti','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8','doroti@yahoo.com','0333 Batanes Street Sampaloc Manila','0333 Batanes Street Sampaloc Manila',NULL,2,NULL,'09359719727'),(8,'Cruz','Juan','A','iamjuan','b49a5780a99ea81284fc0746a78f84a30e4d5c73','juanandonly@gmail','gslkahlashldhalhdlad','ahdshldasldhasl',NULL,1,NULL,'ddddddddd'),(9,'x','x','x','x','11f6ad8ec52a2984abaafd7c3b516503785c2072','x@z','x','x',NULL,1,NULL,'x'),(10,'john','wwwww','d','qwe','da39a3ee5e6b4b0d3255bfef95601890afd80709','','','',NULL,1,NULL,''),(11,'john','doe','D','john','a51dda7c7ff50b61eaea0444371f4a6a9301e501','john@doe.com','john','john',NULL,1,NULL,'john'),(12,'ad','asd','s','asd','85136c79cbf9fe36bb9d05d0639c70c265c18d37','asdf@asdfaf.adfd','asdf','ssdf',0,1,'0000-00-00 00:00:00','123123'),(16,'qqq','qqqq','q','qqq','c6efae9869218c6d45b92a3090bce129f27c070d','qqq@q','2312312312','2131231232312312',0,1,'0000-00-00 00:00:00','09359719727');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `userlogins`
+--
+
+DROP TABLE IF EXISTS `userlogins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `userlogins` (
+  `loginID` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
+  `Status` varchar(7) NOT NULL,
+  `loginTimeStamp` varchar(45) NOT NULL,
+  `userAttemptCount` int(11) DEFAULT NULL,
+  PRIMARY KEY (`loginID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `userlogins`
+--
+
+LOCK TABLES `userlogins` WRITE;
+/*!40000 ALTER TABLE `userlogins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userlogins` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -242,4 +264,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-22  0:45:00
+-- Dump completed on 2017-02-22 13:21:39

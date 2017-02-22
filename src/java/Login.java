@@ -70,13 +70,10 @@ public class Login extends HttpServlet {
 
         java.util.Date dt = new java.util.Date();
 
-        java.text.SimpleDateFormat sdf
-                = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String currentTime = sdf.format(dt);
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + password);
-        
         try {
 
             u = DB.GetData("select userUsername from user where userUsername = '" + username + "'");
@@ -107,37 +104,37 @@ public class Login extends HttpServlet {
                     userType = rs.getInt(2);
                     userAttemptCount = rs.getInt(3);
 
+                }
+
+                if (userType == 1 && userAttemptCount < 3) {
                     pst = connection.prepareStatement("update user set userAttemptCount = 0,userAttemptDate = ?  where userUsername = ?");
                     pst.setString(1, currentTime);
                     pst.setString(2, username);
                     pst.executeUpdate();
-                }
-
-                if (userType == 1) {
-
+                    
                     RequestDispatcher rd = request.getRequestDispatcher("Customer.jsp");
                     rd.forward(request, response);
 
-                } else if (userType == 2) {
+                } else if (userType == 2 && userAttemptCount < 3) {
 
                     RequestDispatcher rd = request.getRequestDispatcher("Manager.jsp");
                     rd.forward(request, response);
 
-                } else if (userType == 3) {
+                } else if (userType == 3 && userAttemptCount < 3) {
 
                     RequestDispatcher rd = request.getRequestDispatcher("Admin.jsp");
                     rd.forward(request, response);
-                } else if (userAttemptCount > 3) { //WILL ADD CAPTCHA NEXT TIME
-
+                } else if (userAttemptCount >= 3) { //WILL ADD CAPTCHA NEXT TIME
+                    
                     pst = connection.prepareStatement("update user set userAttemptCount = 0 where userUsername = ?");
                     pst.setString(1, username);
                     pst.executeUpdate();
 
-                    RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                     rd.include(request, response);
 
                 } else {
-
+                            
                     pst = connection.prepareStatement("update user set userAttemptCount = userAttemptCount + 1 where userUsername = ?");
                     pst.setString(1, username);
                     pst.executeUpdate();
