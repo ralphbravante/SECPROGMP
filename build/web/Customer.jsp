@@ -124,7 +124,9 @@
                             <ul class="dropdown-menu" style="text-align:right;">
                                 
                                 
-                                <li><a href="#">AccounSettings</a></li>
+                                <li><a href="Settings.html">Account Info</a></li>
+                                <li><a href="#">Payment Info</a></li>
+                                <li><a href="#">Purchase History</a></li>
                                 <li><a href="#">Logout</a></li>
                             </ul>
                         </li>

@@ -45,13 +45,7 @@
             margin-left: auto;
             width: 50%;
         }
-        
-        .btn.btn-danger.btn-block{
-          background-color: #F05F40;
-         
-
-        }
-        
+              
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
             background-image: url("img/pic1.jpeg");
@@ -60,37 +54,31 @@
             height:auto;
             
         }
-    
-        #NavPanel{
-            width:300px; 
-        }
-        
+
         .navbar-default{
             background-color:#333;
         }
-        
-        #MainContainer{
-            margin-top: 150px;
-            margin-left: 20px;
+
+        .btn.btn-danger.btn-block{
+          background-color: #F05F40;
         }
-        .tab-content{
-            padding:20px;
-        }
-        
-        .jumbotron{
+            
+        .container{
             margin-top: 100px;
-            padding-top:20px;
+            width:900px;
         }
         
-        .btn{
-            border-radius: 4px;
-            font-weight: normal;
+        legend{
+            color: #F05F40;
+            border-bottom-color: #F05F40;
         }
         
         
         .panel.panel-default{
             padding-left: 20px;
             padding-right: 20px;
+            padding-bottom: 10px;
+            padding-top: 10px;
         }
         
         .alert{
@@ -133,92 +121,109 @@
                         
                     </ul>
                 </div>
-                
-                
-                
-                
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
-
         
         <div class="container">
-            <div class="jumbotron">
-                <h1>Welcome to CSBookstore</h1>
-                <p>The only online bookstore you'll ever need.</p>
-                <br>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Check our products here</a></p>
-            </div>
-            <hr>
-            
             <div class="panel panel-default">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h3>Featured Items</h3>
-                    </div>
-                </div>
                 
-                <div class="row text-center">
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>  
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
+                <legend>Your Account Info:</legend>
+                
+                
+                <div class="row">
+                    <div class="col-md-5">
+                        Lastname:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="LastName" type="text" required>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
+                    <div class="col-md-5">
+                        Firstname:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" id="FirstName" type="text" required/>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
+                    <div class="col-md-2">
+                        M.I.
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" id="MI" type="text" required/>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+                    <div class="col-md-6">
+                        Username:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="SearchUsername" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        Password:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="SearchUsername" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        Email Address:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="SearchUsername" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        Mobile Number:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="SearchUsername" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        Delivery Address:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="SearchUsername" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        Billing Address:
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input class="form-control" id="SearchUsername" type="text" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
             </div>
         </div>
+
+        
+        
         
 
         <script src="vendor/jquery/jquery.min.js"></script>

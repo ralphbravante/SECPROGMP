@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -10,28 +10,14 @@
         <meta name="author" content="">
 
         <title>Welcome to CSBookStore</title>
-
-        <!-- Bootstrap Core CSS -->
+        
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
-        <!-- Plugin CSS -->
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-        <!-- Theme CSS -->
         <link href="css/creative.min.css" rel="stylesheet">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+        
     </head>
     
     <style>
@@ -53,6 +39,12 @@
           background-color: #F05F40;
          
 
+        }
+        
+        .btn.btn-danger.btn-block.btn-small{
+            border-radius: 4px;
+            width: 80%!important;
+            margin-left: 0px!important;
         }
         
         body {
@@ -80,8 +72,13 @@
             padding:20px;
         }
         
-        #Search{
-            
+        .btn.btn-default.dropdown-toggle{
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 0.5px;
+            font-weight: normal;
+            width:92.5%;
+            text-transform: none;
         }
   
     </style>
@@ -107,7 +104,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                <li><a href="#">AccounSettings</a></li>
+                                <li><a href="#">Account Settings</a></li>
                                 <li><a href="#">Logout</a></li>
                             </ul>
                         </li>
@@ -289,18 +286,96 @@
                             <div class="tab-pane text-style" id="UserManagement">
                                 
                                 <div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-2"></div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                 </div>
                                                 <input class="form-control" id="SearchUsername" type="text" placeholder="Search Username">
+                                                
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-md-3">
+                                        <button type="submit" id="SubmitButton" class="btn btn-danger btn-block btn-small">Search</button>
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Account Name:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Password:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Email Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Mobile Number:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Delivery Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        Status:
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Account Status
+                                            <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li class="text-center">Locked</li>
+                                                <li class="text-center">Unlocked</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Billing Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
                             </div>
                             <div class="tab-pane text-style" id="CheckLogs">
                                 
