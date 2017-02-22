@@ -134,7 +134,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input class="form-control" id="MI" name="MI" type="text" maxlength = "1" pattern="A-Z" placeholder="M.I" required/>
+                                        <input class="form-control" id="MI" name="MI" type="text" maxlength = "1" placeholder="M.I" required/>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                                         </div>
-                                        <input class="form-control" id="DelAdd" name="DelAdd" type="text" placeholder="Delivery Address (House No./Unit No. Street, City, Country)" data-error="Please input a valid email." required>                                                       
+                                        <input class="form-control" id="DelAdd" name="DelAdd" type="text" placeholder="Delivery Address (House No./Unit No. Street, City, Country)" data-error="Please input a valid address." required>                                                       
                                     </div>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -212,7 +212,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                         </div>
-                                        <input class="form-control" id="BillAdd" name="BillAdd" type="text" placeholder="Billing Address (House No./Unit No. Street, City, Country)" data-error="Please input a valid email." required>                                                       
+                                        <input class="form-control" id="BillAdd" name="BillAdd" type="text" placeholder="Billing Address (House No./Unit No. Street, City, Country)" data-error="Please input a valid address." required>                                                       
                                     </div>
                                     <div class="help-block with-errors"></div>
                                 </div>
