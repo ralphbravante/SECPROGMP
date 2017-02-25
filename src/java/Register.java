@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -34,13 +35,12 @@ public class Register extends HttpServlet {
         String DelAdd = request.getParameter("DelAdd");
         int UserStatus = 0;
         int UserAttemptCount = 0;
+        int userID;
         String UserAttemptDate = "0000-00-00 00:00:00";
         String UserEditDateTime = "0000-00-00 00:00:00";
-        
-        
+
         PreparedStatement pst = null;
         ResultSet rs = null;
-        
 
         DBAccess DB = new DBAccess();
 
@@ -52,34 +52,43 @@ public class Register extends HttpServlet {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             String generatedPassword = sb.toString();
-            
+
             Class.forName("com.mysql.jdbc.Driver");
-                Connection connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-            
-                
-            pst = connection.prepareStatement("insert into user (userLast, userFirst, userMI, userUsername, userPassword, userEmail, userBillingAdd, userDeliveryAdd, userStatus, userTypeID,userEditDateTime, userContactNum) \n" +
-"values (?,?,?,?,?,?,?,?,?,?,?,?)");
-                java.util.Date dt = new java.util.Date();
-                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String currentTime = sdf.format(dt);
-            
-                pst.setString(1, LastName);
-                pst.setString(2, FirstName);
-                pst.setString(3, MI);
-                pst.setString(4, Username);
-                pst.setString(5, generatedPassword);
-                pst.setString(6, Email);
-                pst.setString(7, BillAdd);
-                pst.setString(8, DelAdd);
-                pst.setInt(9, UserStatus);
-                pst.setInt(10, 1);
-                pst.setString(11, currentTime);
-                pst.setString(12, MobileNum);
-                pst.executeUpdate();    
-                
-         
-           
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+
+            pst = connection.prepareStatement("insert into user (userLast, userFirst, userMI, userUsername, userPassword, userEmail, userBillingAdd, userDeliveryAdd, userStatus, userTypeID,userEditDateTime, userContactNum) \n"
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?)");
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
+
+            pst.setString(1, LastName);
+            pst.setString(2, FirstName);
+            pst.setString(3, MI);
+            pst.setString(4, Username);
+            pst.setString(5, generatedPassword);
+            pst.setString(6, Email);
+            pst.setString(7, BillAdd);
+            pst.setString(8, DelAdd);
+            pst.setInt(9, UserStatus);
+            pst.setInt(10, 1);
+            pst.setString(11, currentTime);
+            pst.setString(12, MobileNum);
+            pst.executeUpdate();
+
+            pst = connection.prepareStatement("select userID from user order by userID desc");
+            rs = pst.executeQuery();
+            rs.next();
+            userID = rs.getInt(1);  
+
+            pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+            pst.setInt(1, userID);
+            pst.setString(2, "Success");
+            pst.setString(3, currentTime);
+            pst.setInt(4, 0);
+            pst.executeUpdate();
+
         } catch (Exception ex) {
             ex.printStackTrace();
 
