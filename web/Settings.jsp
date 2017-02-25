@@ -33,26 +33,26 @@
         <![endif]-->
 
     </head>
-    
+
     <style>  
-        
+
         .input-group{
             width:100%;
         }
-        
+
         #SubmitButton{
             margin-right: auto;
             margin-left: auto;
             width: 50%;
         }
-              
+
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
             background-image: url("img/pic1.jpeg");
             background-size:100%;
             background-repeat: no-repeat;
             height:auto;
-            
+
         }
 
         .navbar-default{
@@ -60,32 +60,32 @@
         }
 
         .btn.btn-danger.btn-block{
-          background-color: #F05F40;
+            background-color: #F05F40;
         }
-            
+
         .container{
             margin-top: 100px;
             width:900px;
         }
-        
+
         legend{
             color: #F05F40;
             border-bottom-color: #F05F40;
         }
-        
-        
+
+
         .panel.panel-default{
             padding-left: 20px;
             padding-right: 20px;
             padding-bottom: 10px;
             padding-top: 10px;
         }
-        
+
         .alert{
             display: none;
         }
-        
-  
+
+
     </style>
 
     <body>
@@ -110,26 +110,27 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                
-                                
+
+
                                 <li><a href="Settings.html">Account Info</a></li>
                                 <li><a href="#">Payment Info</a></li>
                                 <li><a href="#">Purchase History</a></li>
                                 <li><a href="#">Logout</a></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
         </nav>
-        
+
         <div class="container">
+
             <div class="panel panel-default">
-                
+
                 <legend>Your Account Info:</legend>
-                
-                
+
+
                 <div class="row">
                     <div class="col-md-5">
                         Lastname:
@@ -137,7 +138,7 @@
                             <div class="input-group">
                                 <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                 </div>
-                                <input class="form-control" id="LastName" type="text" required>
+                                <input class="form-control" id="LastName" type="text" value=${Settings.Lastname}>
                             </div>
                         </div>
                     </div>
@@ -150,7 +151,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        M.I.
+                        M.I.:
                         <div class="form-group">
                             <div class="input-group">
                                 <input class="form-control" id="MI" type="text" required/>
@@ -220,11 +221,12 @@
                 </div>
                 <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
             </div>
+
         </div>
 
-        
-        
-        
+
+
+
 
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
