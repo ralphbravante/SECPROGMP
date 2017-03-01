@@ -94,10 +94,7 @@ public class Login extends HttpServlet {
                 System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
 
                 if (exists && userStatus == 0 && valid) {
-                    //System.out.println(rs.getInt(1) + " AND " + rs.getInt(2));
-                    //System.out.println(currentTime);
-                    //userType = rs.getInt(2);
-                    pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                    pst = connection.prepareStatement("insert into userlogins (userID, loginStatus, loginTimeStamp, loginAttemptCount)values (?,?,?,?)");
                     pst.setInt(1, userID);
                     pst.setString(2, "Success");
                     pst.setString(3, currentTime);
@@ -133,7 +130,7 @@ public class Login extends HttpServlet {
                     }
                 } else if (exists && userStatus == 1 && valid) {
                     //Request to UNLOCK page
-                    pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                    pst = connection.prepareStatement("insert into userlogins (userID, userStatus, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
                     pst.setInt(1, userID);
                     pst.setString(2, "Locked");
                     pst.setString(3, currentTime);
