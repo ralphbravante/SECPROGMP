@@ -10,32 +10,20 @@
         <meta name="author" content="">
 
         <title>Welcome to CSBookStore</title>
-
-        <!-- Bootstrap Core CSS -->
+        
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
-        <!-- Plugin CSS -->
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-        <!-- Theme CSS -->
         <link href="css/creative.min.css" rel="stylesheet">
-        <link href="css/cart.css" rel="stylesheet">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+        
     </head>
     
-    <style>  
+    <style>
+        
+
+        
         
         .input-group{
             width:100%;
@@ -53,9 +41,15 @@
 
         }
         
+        .btn.btn-danger.btn-block.btn-small{
+            border-radius: 4px;
+            width: 80%!important;
+            margin-left: 0px!important;
+        }
+        
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-            background-image: url("img/pic1.jpeg");
+            background-image: url("img/pic2.jpg");
             background-size:100%;
             background-repeat: no-repeat;
             height:auto;
@@ -70,19 +64,22 @@
             background-color:#333;
         }
         
+        #MainContainer{
+            margin-top: 150px;
+            margin-left: 20px;
+        }
+        .tab-content{
+            padding:20px;
+        }
         
-        
-        .btn{
+        .btn.btn-default.dropdown-toggle{
             border-radius: 4px;
+            border-style: solid;
+            border-width: 0.5px;
             font-weight: normal;
+            width:92.5%;
+            text-transform: none;
         }
-        
-        
-        .container{
-            margin-top: 100px;
-        }
-        
-        
   
     </style>
 
@@ -102,15 +99,12 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Customer!</a>
+                            <a>Hello, Admin!</a>
                         </li>
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart(0)</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                
-                                
-                                <li><a href="#">AccounSettings</a></li>
+                                <li><a href="#">Account Settings</a></li>
                                 <li><a href="#">Logout</a></li>
                             </ul>
                         </li>
@@ -126,76 +120,261 @@
             <!-- /.container-fluid -->
         </nav>
 
-        
-        <div class="container">
-            <div class="panel panel-default">
-                <table id="cart" class="table table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th style="width:50%">Product</th>
-                            <th style="width:10%">Price</th>
-                            <th style="width:8%">Quantity</th>
-                            <th style="width:17%" class="text-center">Subtotal</th>
-                            <th style="width:15%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-th="Product">
+        <div class="container" id="MainContainer">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default" id="NavPanel">
+                        <nav class="nav-sidebar">
+                            <ul class="nav tabs">
+                                <li class="active"><a href="#AddManager" data-toggle="tab">Add New Manager</a></li>
+                                <li class=""><a href="#AddGenre" data-toggle="tab">Add New Genre</a></li>
+                                <li class=""><a href="#UserManagement" data-toggle="tab">User Management</a></li>
+                                <li class=""><a href="#CheckLogs" data-toggle="tab">Check Logs</a></li>
+                            </ul>
+                            </nav>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+                    <div class="panel panel-default" id="MainPanel">
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane active text-style" id="AddManager">
+                                <form data-toggle="validator" role="form">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class=" Name glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="LastName" type="text" placeholder="Last Name" required>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="FirstName" type="text" placeholder="First Name" required/>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="MI" type="text" placeholder="M.I" required/>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="Username" type="text" placeholder="Username" required>
+                                                </div>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="MobileNum" pattern="0-9" type="text" placeholder="Mobile Number" required>
+                                                </div>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="Password" data-minlength="6" type="password" placeholder="Password" data-error="Minimum of 6 Characters." required>
+                                                </div>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="RePassword" type="password" placeholder="Confirm Password" data-match="#Password" data-error="Entered Passwords doesn't match." required>
+                                                </div>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="Email" type="email" placeholder="Email Address" data-error="Please input a valid email." required>                                                       
+                                                </div>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                        
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Product Type
+                                            <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li class="text-center">Locked</li>
+                                                <li class="text-center">Unlocked</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button>
+                                    </div>
+                                </form>
+                                
+                            
+                            
+                            <div class="tab-pane text-style" id="AddGenre">
                                 <div class="row">
-                                    <div class="col-sm-4 hidden-xs"><img src="http://placehold.it/140x140" alt="..." class="img-responsive"/></div>
-                                    <div class="col-sm-8">
-                                        <h4 class="nomargin">Product 1</h4>
-                                        <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="ProdTypeName" type="text" placeholder="Enter Product Type Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="ProdDesc" type="text" placeholder="Enter Product Description" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button>
+                                </div>
+                            </div>
+                            <div class="tab-pane text-style" id="UserManagement">
+                                
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text" placeholder="Search Username">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" id="SubmitButton" class="btn btn-danger btn-block btn-small">Search</button>
                                     </div>
                                 </div>
-                            </td>
-                            <td data-th="Price">$1.99</td>
-                            <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" value="1">
-                            </td>
-                            <td data-th="Subtotal" class="text-center">1.99</td>
-                            <td class="actions" data-th="">
-                                
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>Remove Item(s)</button>								
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-th="Product">
                                 <div class="row">
-                                    <div class="col-sm-4 hidden-xs"><img src="http://placehold.it/140x140" alt="..." class="img-responsive"/></div>
-                                    <div class="col-sm-8">
-                                        <h4 class="nomargin">Product 2</h4>
-                                        <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                    <div class="col-md-6">
+                                        Account Name:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Password:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Email Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Mobile Number:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Delivery Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        Status:
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Account Status
+                                            <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li class="text-center">Locked</li>
+                                                <li class="text-center">Unlocked</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Billing Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" type="text">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </td>
-                            <td data-th="Price">$1.99</td>
-                            <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" value="1">
-                            </td>
-                            <td data-th="Subtotal" class="text-center">1.99</td>
-                            <td class="actions" data-th="">
+                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
+                            </div>
+                            <div class="tab-pane text-style" id="CheckLogs">
                                 
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>Remove Item(s)</button>								
-                            </td>
-                        </tr>
-                    </tbody>
-                    
-                    
-                    <tfoot>
-                        <tr class="visible-xs">
-                            <td class="text-center"><strong>Total $3.98</strong></td>
-                        </tr>
-                        <tr>
-                            <td><a href="Customer.html" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                            <td colspan="2" class="hidden-xs"></td>
-                            <td class="hidden-xs text-center"><strong>Total $3.98</strong></td>
-                            <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-                        </tr>
-                    </tfoot>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
             </div>
+            
+            
         </div>
         
         
@@ -206,8 +385,8 @@
         <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
         <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
         <script src="js/creative.min.js"></script>
+        <script src="js/validator.js"></script>
         
-       
 
     </body>
 
