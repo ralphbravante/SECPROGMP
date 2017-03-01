@@ -1,179 +1,193 @@
-<%-- 
-    Document   : Manager
-    Created on : 02 1, 17, 9:46:23 AM
-    Author     : ralph
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-        <link href="css/style.css" rel="stylesheet">
+        <title>Welcome to CSBookStore</title>
 
-        <title>Home</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+        <!-- Plugin CSS -->
+        <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- Theme CSS -->
+        <link href="css/creative.min.css" rel="stylesheet">
+        <link href="css/cart.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
     </head>
-    <style>
-        body{
-            background-color:#F05053;
-
-            /* background-image: url("pic1.jpeg");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;*/
-        }
-
-
-
-
-        .card{
-            width: 650px;
-            margin-right:auto;
-            margin-left: auto;
-            border-radius: 10px;
-
-        }
-
-        .card-header{
-            background-color: inherit;
-
-        }
-
-        .card-header{
-            background-color: inherit;
-        }
-
-        .md-form{
-            width: 500px;
-            margin-right:auto;
-            margin-left: auto;
-            text-align: left;
-        }
-
-        .btn-danger{
-            border-radius: 20px;
-            width:300px;
-            margin-right:auto;
-            margin-left: auto;
-        }
-
-        .md-form:focus{
-            border-color:#F05053; 
-        }
-
-        .fa.fa-user.prefix.active, .fa.fa-lock.prefix.active {
-            color:#F05053;
-        }
-
-        #InputLabel{
-            font-size: 12px;
-            font-weight:600;
-
-        }
-
-        #InputLabel.active{
-            color:#F05053;
+    
+    <style>  
+        
+        .input-group{
+            width:100%;
         }
         
-        .container{
-            margin-left: auto;
+        #SubmitButton{
             margin-right: auto;
+            margin-left: auto;
+            width: 50%;
         }
-    </style>
-    <body>
-        <div class="container">
-            </br>
-            <div class="card text-center"> 
-                </br></br>
-                <h1>Hello Manager!!!</h1>
-               
+              
+        body {
+            font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+            background-image: url("img/pic1.jpeg");
+            background-size:100%;
+            background-repeat: no-repeat;
+            height:auto;
             
-            <div class="container">
-                        <form action="ProductServlet" method="POST">
-                            <div class="row">
-                                
-                                <div class="col-md-8">
-                                    <div class="md-form">
-                                        <input type="text" id="prodName" name="prodName" class="form-control">
-                                        <label id="InputLabel" for="prodName">Product Name</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="md-form">
-                                        <input type="text" id="prodType" name="prodType" class="form-control">
-                                        <label id="InputLabel" for="prodType">Product Type</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="md-form">
-                                        <input type="text" id="prodDesc" name="prodDesc" class="form-control">
-                                        <label id="InputLabel" for="prodDesc">Product Description</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="md-form">
-                                        <input type="text" id="prodCount" name="prodCount" class="form-control">
-                                        <label id="InputLabel" for="prodCount">Product Count</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="md-form">
-                                        <input type="text" id="prodPrice" name="prodPrice" class="form-control">
-                                        <label id="InputLabel" for="prodPrice">Product Price</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="md-form">
-                                        <input type="text" id="prodBy" name="prodBy" class="form-control">
-                                        <label id="InputLabel" for="prodBy">Product By</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <br>
-                                <button type="submit" id="SubmitButton" class="btn btn-danger">Add Product</button>
-                            <br>
-                        </form>
-            </div>   
-            
-                        </div>
+        }
 
+        .navbar-default{
+            background-color:#333;
+        }
+
+        .btn.btn-danger.btn-block{
+          background-color: #F05F40;
+        }
+            
+        .container{
+            margin-top: 100px;
+            width:1300px;
+        }
+        
+        legend{
+            color: #F05F40;
+            border-bottom-color: #F05F40;
+        }
+        
+        
+        .panel.panel-default{
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        
+        .alert{
+            display: none;
+        }
+        
+        .btn.btn-default.dropdown-toggle{
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 0.5px;
+            font-weight: normal;
+            width:92.5%;
+            text-transform: none;
+        }
+        
+  
+    </style>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top">CSBookstore</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a>Hello, Manager!</a>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="text-align:right;">
+                                
+                                
+                                <li><a href="Settings.html">Account Info</a></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container align-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">  
+                        <div class="row">
+                            <div class="col-md-10">
+                            </div>
+                            <div class="col-md-2">
+                                <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by <span class="caret"></span></button>
+                                <ul class="dropdown-menu" style="text-align:right;"> 
+                                    <li><a href="#">Date</a></li>
+                                    <li><a href="#">Month</a></li>
+                                    <li><a href="#">Year</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%">Product ID</th>
+                                    <th style="width:10%">Purchase ID</th>
+                                    <th style="width:10%">User ID</th>
+                                    <th style="width:30%">Product Name</th>
+                                    <th style="width:20%">Product Type</th>
+                                    <th style="width:20%">Purchase Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td data-th="Product ID">0112</td>
+                                <td data-th="Purchase ID">24232</td>
+                                <td data-th="User ID">021312</td>
+                                <td data-th="Product Name">Harry Potter</td>
+                                <td data-th="Product Type">Book</td>
+                                <td data-th="Product ID">September 16, 2017</td>
+                                
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <form method="GET" action="Logout">
-            <input type="submit" class="btn btn-danger" value="Sign Out" />
-        </form>
+        
 
-        <!-- SCRIPTSSSSS -->
+        
+        
+        
 
-
-        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/tether.min.js"></script>
-
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
-
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+        <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="js/creative.min.js"></script>
+        <script src="js/validator.js"></script>
 
     </body>
+
 </html>
