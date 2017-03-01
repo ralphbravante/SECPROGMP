@@ -1,3 +1,7 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,6 +88,20 @@
     </style>
 
     <body>
+        
+        <% 
+            
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+            
+            String username = request.getParameter("Username"); 
+            
+        %>
+        
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -99,13 +117,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Admin!</a>
+                            <a>Hello, <% out.print(username); %> !</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
                                 <li><a href="#">Account Settings</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="">Logout</a></li>
                             </ul>
                         </li>
                         
