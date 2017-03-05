@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Customer.jsp</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Login.jsp</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Login.java</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Register.java</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Admin.jsp</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Register.jsp</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Logout.jsp</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/web/Register.jsp</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/web/Admin.jsp</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/src/java/AddGenre.java</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/src/java/Register.java</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/src/java/Login.java</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/src/java/AddManager.java</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/web/ProductManager.jsp</file>
+            <file>file:/C:/Users/Miguel%20Cruz/Documents/GitHub/SECPROGMP/src/java/Logout.java</file>
         </group>
     </open-files>
 </project-private>

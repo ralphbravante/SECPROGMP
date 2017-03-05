@@ -1,7 +1,5 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
+<%@ page import="java.sql.*" %>
+<%ResultSet resultset = null;%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,60 +12,60 @@
         <meta name="author" content="">
 
         <title>Welcome to CSBookStore</title>
-        
+
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
         <link href="css/creative.min.css" rel="stylesheet">
-        
-    </head>
-    
-    <style>
-        
 
-        
-        
+    </head>
+
+    <style>
+
+
+
+
         .input-group{
             width:100%;
         }
-        
+
         #SubmitButton{
             margin-right: auto;
             margin-left: auto;
             width: 50%;
         }
-        
+
         .btn.btn-danger.btn-block{
-          background-color: #F05F40;
-         
+            background-color: #F05F40;
+
 
         }
-        
+
         .btn.btn-danger.btn-block.btn-small{
             border-radius: 4px;
             width: 80%!important;
             margin-left: 0px!important;
         }
-        
+
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
             background-image: url("img/pic2.jpg");
             background-size:100%;
             background-repeat: no-repeat;
             height:auto;
-            
+
         }
-    
+
         #NavPanel{
             width:300px; 
         }
-        
+
         .navbar-default{
             background-color:#333;
         }
-        
+
         #MainContainer{
             margin-top: 150px;
             margin-left: 20px;
@@ -75,33 +73,35 @@
         .tab-content{
             padding:20px;
         }
-        
+
         .btn.btn-default.dropdown-toggle{
             border-radius: 4px;
             border-style: solid;
             border-width: 0.5px;
             font-weight: normal;
-            width:92.5%;
+            width:100%;
             text-transform: none;
+            background-color:white;
+            margin-bottom: 0px;
+
         }
-  
+        .dropdown-menu{
+            text-align: center;
+            width:150px;
+        }
+        .btn-group{
+
+            font-weight: normal;
+            width:100%;
+            text-transform: none;
+            background-color:white;
+            margin-bottom: 0px;
+
+        }
+
     </style>
 
     <body>
-        
-        <% 
-            
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-            
-            String username = request.getParameter("Username"); 
-            
-        %>
-        
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -117,22 +117,22 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, <% out.print(username); %> !</a>
+                            <a>Hello, Admin!</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
                                 <li><a href="#">Account Settings</a></li>
-                                <li><a href="">Logout</a></li>
+                                <li><a href="#">Logout</a></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
-                
-                
-                
-                
+
+
+
+
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
@@ -149,16 +149,16 @@
                                 <li class=""><a href="#UserManagement" data-toggle="tab">User Management</a></li>
                                 <li class=""><a href="#CheckLogs" data-toggle="tab">Check Logs</a></li>
                             </ul>
-                            </nav>
+                        </nav>
                     </div>
                 </div>
-                
+
                 <div class="col-md-8">
                     <div class="panel panel-default" id="MainPanel">
                         <div class="tab-content">
-                            
+
                             <div class="tab-pane active text-style" id="AddManager">
-                                <form data-toggle="validator" role="form">
+                                <form data-toggle="validator" role="form" method="POST" action = "AddManager">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
@@ -167,7 +167,7 @@
                                                     </div>
                                                     <input class="form-control" id="LastName" type="text" placeholder="Last Name" required>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
 
@@ -176,7 +176,6 @@
                                                 <div class="input-group">
                                                     <input class="form-control" id="FirstName" type="text" placeholder="First Name" required/>
                                                 </div>
-                                                
                                             </div>
                                         </div>
 
@@ -185,7 +184,7 @@
                                                 <div class="input-group">
                                                     <input class="form-control" id="MI" type="text" placeholder="M.I" required/>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
 
@@ -205,7 +204,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="MobileNum" pattern="0-9" type="text" placeholder="Mobile Number" required>
+                                                    <input class="form-control" id="MobileNum" type="text" placeholder="Mobile Number" required>
                                                 </div>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -243,53 +242,64 @@
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
-                                        
-                                        <div class="col-md-4">
-                                        
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Product Type
-                                            <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li class="text-center">Locked</li>
-                                                <li class="text-center">Unlocked</li>
+                                    </div>
+                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button>
+                            </div>
+                            </form>
+
+
+
+                            <div class="tab-pane text-style" id="AddGenre" >
+                                <form role="form" method="post" action="AddGenre">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="ProdTypeName" type="text" name ="ProdType" placeholder="Enter Product Type Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+
+                                        Class.forName("com.mysql.jdbc.Driver");
+                                        Connection connection = DriverManager.getConnection(
+                                                "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+
+                                        Statement statement = connection.createStatement();
+
+                                        resultset = statement.executeQuery("select userUsername from user where userTypeID = 4");
+
+                                    %>
+
+                                    <div class="col-md-3">
+                                        <div class="btn-group">
+                                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product  Manager<span class="caret"></span></button>
+                                            <input type="hidden" id="dropdownselected" name = "ProdManager" value="">
+                                            <ul class="dropdown-menu"> 
+
+                                                <%  while (resultset.next()) {%>
+                                                <li><a href="#"><%= resultset.getString(1)%></a></li>
+                                                <% }%>
                                             </ul>
                                         </div>
                                     </div>
-
-                                    </div>
-                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button>
-                                    </div>
-                                </form>
-                                
-                            
-                            
-                            <div class="tab-pane text-style" id="AddGenre">
-                                <div class="row">
                                     <div class="col-md-10">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                                 </div>
-                                                <input class="form-control" id="ProdTypeName" type="text" placeholder="Enter Product Type Name" required>
+                                                <input class="form-control" id="ProdDesc" type="text" name = "ProdDesc" placeholder="Enter Product Description" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-10">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="ProdDesc" type="text" placeholder="Enter Product Description" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button>
                                 </div>
+                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button> 
+                                </form>
                             </div>
                             <div class="tab-pane text-style" id="UserManagement">
-                                
+
                                 <div class="row">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-6">
@@ -298,7 +308,7 @@
                                                 <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                 </div>
                                                 <input class="form-control" id="SearchUsername" type="text" placeholder="Search Username">
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -357,17 +367,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         Status:
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Account Status
-                                            <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li class="text-center">Locked</li>
-                                                <li class="text-center">Unlocked</li>
+
+                                        <div class="btn-group">
+                                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account Status<span class="caret"></span></button>
+                                            <ul id="Status" class="dropdown-menu"> 
+                                                <li><a href="#">Locked</a></li>
+                                                <li><a href="#">Unlocked</a></li>
                                             </ul>
                                         </div>
+
                                     </div>
                                     <div class="col-md-8">
                                         Billing Address:
@@ -383,19 +393,19 @@
                                 <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
                             </div>
                             <div class="tab-pane text-style" id="CheckLogs">
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
-            
-            
+
+
         </div>
-        
-        
+
+
 
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -404,7 +414,22 @@
         <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
         <script src="js/creative.min.js"></script>
         <script src="js/validator.js"></script>
-        
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            
+            
+            $(".dropdown-menu li a").click(function () {
+                var selText = $(this).text();
+                $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+                $("#dropdownselected").val(selText);
+            });
+            
+            
+    
+        </script>
 
     </body>
 

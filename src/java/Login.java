@@ -94,7 +94,7 @@ public class Login extends HttpServlet {
                 System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
 
                 if (exists && userStatus == 0 && valid) {
-                    pst = connection.prepareStatement("insert into userlogins (userID, loginStatus, loginTimeStamp, loginAttemptCount)values (?,?,?,?)");
+                    pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
                     pst.setInt(1, userID);
                     pst.setString(2, "Success");
                     pst.setString(3, currentTime);
@@ -102,35 +102,23 @@ public class Login extends HttpServlet {
                     pst.executeUpdate();
 
                     RequestDispatcher rd;
-                    switch (userTypeID) {
-                        case 1:
-                            rd = request.getRequestDispatcher("Customer.jsp");
-                            rd.forward(request, response);
-                            break;
-                        case 2:
-                            rd = request.getRequestDispatcher("Manager.jsp");
-                            rd.forward(request, response);
-                            break;
-                        case 3:
-                            rd = request.getRequestDispatcher("Manager.jsp");
-                            rd.forward(request, response);
-                            break;
-                        case 4:
-                            rd = request.getRequestDispatcher("Manager.jsp");
-                            rd.forward(request, response);
-                            break;
-                        case 5:
-                            rd = request.getRequestDispatcher("Manager.jsp");
-                            rd.forward(request, response);
-                            break;
-                        case 6:
-                            rd = request.getRequestDispatcher("Admin.jsp");
-                            rd.forward(request, response);
-                            break;
+                  
+                    if(userTypeID == 1){
+                        rd = request.getRequestDispatcher("Customer.jsp");
+                        rd.forward(request, response);
+                    }else if(userTypeID == 2){
+                        rd = request.getRequestDispatcher("Admin.jsp");
+                        rd.forward(request, response);
+                    }else if(userTypeID == 3){
+                        rd = request.getRequestDispatcher("FinancialManager.jsp");
+                        rd.forward(request, response);
+                    }else if (userTypeID >= 4){
+                        rd = request.getRequestDispatcher("ProductManager.jsp");
+                        rd.forward(request, response);
                     }
                 } else if (exists && userStatus == 1 && valid) {
                     //Request to UNLOCK page
-                    pst = connection.prepareStatement("insert into userlogins (userID, userStatus, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                    pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
                     pst.setInt(1, userID);
                     pst.setString(2, "Locked");
                     pst.setString(3, currentTime);
