@@ -91,8 +91,17 @@
             border-style: solid;
             border-width: 0.5px;
             font-weight: normal;
-            width:92.5%;
+            width:100%;
             text-transform: none;
+            background-color:white;
+            margin-bottom: 10px;
+            
+        }
+        .dropdown-menu{
+            margin-left: 15px;
+            text-align: center;
+            width:186.663px;
+            margin-top: -10px;
         }
         
   
