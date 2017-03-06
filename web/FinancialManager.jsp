@@ -131,8 +131,8 @@
                             <ul class="dropdown-menu" style="text-align:right;">
                                 
                                 
-                                <li><a href="Settings.html">Account Info</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="Settings.jsp">Account Info</a></li>
+                                <li><a href="Login.jsp">Logout</a></li>
                             </ul>
                         </li>
                         

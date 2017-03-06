@@ -9,6 +9,7 @@
  * @author Beep xD
  */
 public class Accounts {
+
     private int ID;
     private String LastName;
     private String FirstName;
@@ -21,12 +22,16 @@ public class Accounts {
     private String MobileNumber;
     private String CreatedDate;
     private String ModifiedDate;
+    private int Status;
 
-    /**
-     * @return the ID
-     */
-    
-    
+    public void setStatus(int Status) {
+        this.Status = Status;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
     public void setMobileNumber(String MobileNumber) {
         this.MobileNumber = MobileNumber;
     }
@@ -34,8 +39,7 @@ public class Accounts {
     public String getMobileNumber() {
         return MobileNumber;
     }
-    
-    
+
     public void setLastName(String LastName) {
         this.LastName = LastName;
     }
@@ -59,8 +63,7 @@ public class Accounts {
     public String getMI() {
         return MI;
     }
-    
-    
+
     public int getID() {
         return ID;
     }
@@ -68,8 +71,6 @@ public class Accounts {
     /**
      * @return the Name
      */
-  
-
     /**
      * @return the Username
      */
@@ -129,7 +130,6 @@ public class Accounts {
     /**
      * @param Name the Name to set
      */
-
     /**
      * @param Username the Username to set
      */

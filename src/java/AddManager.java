@@ -78,7 +78,6 @@ public class AddManager extends HttpServlet {
         String Username = request.getParameter("Username");
         String Email = request.getParameter("Email");
         String Password = request.getParameter("Password");
-        String RePassword = request.getParameter("RePassword");
         String MobileNum = request.getParameter("MobileNum");
         int UserStatus = 0;
         int UserAttemptCount = 0;
@@ -103,7 +102,7 @@ public class AddManager extends HttpServlet {
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
 
-            pst = connection.prepareStatement("insert into user (userLast, userFirst, userMI, userUsername, userPassword, userEmail, userStatus, userTypeID,userEditDateTime, userContactNum) \n"
+            pst = connection.prepareStatement("insert into user (userLast, userFirst, userMI, userUsername, userPassword, userEmail, userStatus, userTypeID, userEditDateTime, userContactNum)"
                     + "values (?,?,?,?,?,?,?,?,?,?)");
             java.util.Date dt = new java.util.Date();
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

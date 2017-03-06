@@ -127,7 +127,7 @@
                                 <li><a href="Settings.jsp">Account Info</a></li>
                                 <li><a href="#">Payment Info</a></li>
                                 <li><a href="#">Purchase History</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="Login.jsp">Logout</a></li>
                             </ul>
                         </li>
                         

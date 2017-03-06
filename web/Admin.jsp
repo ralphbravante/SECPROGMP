@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page import="java.sql.*" %>
 <%ResultSet resultset = null;%>
 <!DOCTYPE html>
@@ -144,9 +145,9 @@
                     <div class="panel panel-default" id="NavPanel">
                         <nav class="nav-sidebar">
                             <ul class="nav tabs">
-                                <li class="active"><a href="#AddManager" data-toggle="tab">Add New Manager</a></li>
+                                <li class="active"><a href="#UserManagement" data-toggle="tab">User Management</a></li>
+                                <li class=""><a href="#AddManager" data-toggle="tab">Add New Manager</a></li>
                                 <li class=""><a href="#AddGenre" data-toggle="tab">Add New Genre</a></li>
-                                <li class=""><a href="#UserManagement" data-toggle="tab">User Management</a></li>
                                 <li class=""><a href="#CheckLogs" data-toggle="tab">Check Logs</a></li>
                             </ul>
                         </nav>
@@ -156,8 +157,139 @@
                 <div class="col-md-8">
                     <div class="panel panel-default" id="MainPanel">
                         <div class="tab-content">
+                            
+                            <div class="tab-pane active text-style" id="UserManagement">
+                               
+                                <div class="row">
+                                     <form role="form" method="GET" action="Search">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" name="SearchUsername" type="text" placeholder="Search Username">
 
-                            <div class="tab-pane active text-style" id="AddManager">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" id="SubmitButton" class="btn btn-danger btn-block btn-small">Search</button>
+                                    </div>
+                                     </form>
+                                </div>
+                            </form>
+                           
+                                <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Last Name:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getLastName()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        First Name:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getFirstName()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        MI:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getMI()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                            <div class="col-md-5">
+                                        Username:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getUsername()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        Password:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getPassword()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Email Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getEmailAddress()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        Mobile Number:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getMobileNumber()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        Delivery Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getDeliveryAddress()}" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        Status:
+
+                                        <div class="btn-group">
+                                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account Status<span class="caret"></span></button>
+                                            <ul id="Status" class="dropdown-menu">
+                                                <li selected><a href="#">Locked</a></li>
+                                                <li><a href="#">Unlocked</a></li>
+                                                
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        Billing Address:
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </div>
+                                                <input class="form-control" id="SearchUsername" value="${aResult.getBillingAddress()}" type="text">
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
+                            </div>
+
+                            <div class="tab-pane text-style" id="AddManager">
                                 <form data-toggle="validator" role="form" method="POST" action = "AddManager">
                                     <div class="row">
                                         <div class="col-md-5">
@@ -165,7 +297,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class=" Name glyphicon glyphicon-user" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="LastName" type="text" placeholder="Last Name" required>
+                                                    <input class="form-control" id="LastName" name="LastName" type="text" placeholder="Last Name" required>
                                                 </div>
 
                                             </div>
@@ -174,7 +306,7 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input class="form-control" id="FirstName" type="text" placeholder="First Name" required/>
+                                                    <input class="form-control" id="FirstName" name="FirstName" type="text" placeholder="First Name" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,7 +314,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input class="form-control" id="MI" type="text" placeholder="M.I" required/>
+                                                    <input class="form-control" id="MI" name="MI" type="text" maxlength = "1" placeholder="M.I" required/>
                                                 </div>
 
                                             </div>
@@ -193,7 +325,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="Username" type="text" placeholder="Username" required>
+                                                    <input class="form-control" id="Username" name="Username" type="text" placeholder="Username" required>
                                                 </div>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -204,7 +336,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="MobileNum" type="text" placeholder="Mobile Number" required>
+                                                    <input class="form-control" id="MobileNum" name="MobileNum" maxlength = "11" type="text" placeholder="Mobile Number" required>
                                                 </div>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -215,7 +347,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="Password" data-minlength="6" type="password" placeholder="Password" data-error="Minimum of 6 Characters." required>
+                                                    <input class="form-control" id="Password" name="Password" data-minlength="6" type="password" placeholder="Password" data-error="Minimum of 6 Characters." required>
                                                 </div>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -237,7 +369,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="Email" type="email" placeholder="Email Address" data-error="Please input a valid email." required>                                                       
+                                                    <input class="form-control" id="Email" type="email" name="Email" placeholder="Email Address" data-error="Please input a valid email." required>                                                       
                                                 </div>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -298,100 +430,7 @@
                                 <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button> 
                                 </form>
                             </div>
-                            <div class="tab-pane text-style" id="UserManagement">
-
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text" placeholder="Search Username">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button type="submit" id="SubmitButton" class="btn btn-danger btn-block btn-small">Search</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        Account Name:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        Password:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        Email Address:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        Mobile Number:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        Delivery Address:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        Status:
-
-                                        <div class="btn-group">
-                                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account Status<span class="caret"></span></button>
-                                            <ul id="Status" class="dropdown-menu"> 
-                                                <li><a href="#">Locked</a></li>
-                                                <li><a href="#">Unlocked</a></li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-8">
-                                        Billing Address:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
-                            </div>
+                            
                             <div class="tab-pane text-style" id="CheckLogs">
 
                             </div>
