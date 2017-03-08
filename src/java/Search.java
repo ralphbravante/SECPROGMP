@@ -61,6 +61,7 @@ public class Search extends HttpServlet {
         Accounts aResult = AccountServices.getAccount(username);
 
         if(aResult != null){
+            System.out.println("userID is   as;dkfjalsjflaksdjflkasjdjfajsdkf      ###### " + aResult.getID());
             System.out.println("lastname:" + aResult.getLastName());
             System.out.println("firstname:" + aResult.getFirstName());
             System.out.println("mi:" + aResult.getMI());

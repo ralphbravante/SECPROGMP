@@ -73,12 +73,13 @@ public class AccountServices {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
             
-             pstmt = connection.prepareStatement("SELECT userLast, userFirst, userMI, userUsername, userPassword, userEmail, userContactNum, userDeliveryAdd, userBillingAdd, userStatus FROM secprog.user WHERE userUsername = ?;");
+             pstmt = connection.prepareStatement("SELECT userID, userLast, userFirst, userMI, userUsername, userPassword, userEmail, userContactNum, userDeliveryAdd, userBillingAdd, userStatus FROM secprog.user WHERE userUsername = ?;");
             pstmt.setString(1, username);
             rs = pstmt.executeQuery();
             
             while(rs.next()){
                 //Accounts a = new Accounts();
+                a.setID(rs.getInt("userID"));
                 a.setLastName(rs.getString("userLast"));
                 a.setFirstName(rs.getString("userFirst"));
                 a.setMI(rs.getString("userMI"));

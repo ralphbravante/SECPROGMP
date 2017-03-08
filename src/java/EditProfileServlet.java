@@ -1,6 +1,12 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,7 +72,55 @@ public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        
+        String lastname = request.getParameter("editLastname");
+        String firstname = request.getParameter("editFirstname");
+        String MI = request.getParameter("editMI");
+        String username = request.getParameter("editUsername");
+        String email = request.getParameter("editEmail");
+        String mobileNum = request.getParameter("editMobileNumber");
+        String deliveryAdd = request.getParameter("editDeliveryAdd");
+        String billingAdd = request.getParameter("editBillingAdd");
+        //int status =  Integer.parseInt(request.getParameter("editStatus"));
+        
+        PreparedStatement pst = null;
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+            
+            pst = connection.prepareStatement("UPDATE `secprog`.`user` SET userLast=? , userFirst=?, userMI=?, userUsername=?, userEmail=?, userBillingAdd=?, userDeliveryAdd=?, userContactNum=?, userStatus=?, userEditDateTime=? WHERE userLast=? AND userFirst=? AND userMI=?");
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
+            
+            pst.setString(1, lastname);
+            pst.setString(2, firstname);
+            pst.setString(3, MI);
+            pst.setString(4, username);
+            pst.setString(5, email);
+            pst.setString(6, billingAdd);
+            pst.setString(7, deliveryAdd);
+            pst.setString(8, mobileNum);
+            pst.setInt(9, 0);
+            pst.setString(10, currentTime);
+            pst.setString(11, lastname);
+            pst.setString(12, firstname);
+            pst.setString(13, MI);
+            pst.executeUpdate();
+             
+             
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.getRequestDispatcher("Admin.jsp").forward(request, response);
+           
+
+            
     }
 
     /**

@@ -9,7 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
+        <meta name="description" content=""> 
         <meta name="author" content="">
 
         <title>Welcome to CSBookStore</title>
@@ -123,8 +123,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                <li><a href="#">Account Settings</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="Settings.jsp">Account Settings</a></li>
+                                <li><a href="Login.jsp">Logout</a></li>
                             </ul>
                         </li>
 
@@ -157,136 +157,139 @@
                 <div class="col-md-8">
                     <div class="panel panel-default" id="MainPanel">
                         <div class="tab-content">
-                            
+
                             <div class="tab-pane active text-style" id="UserManagement">
-                               
-                                <div class="row">
-                                     <form role="form" method="GET" action="Search">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="SearchUsername" name="SearchUsername" type="text" placeholder="Search Username">
 
+                                <div class="row">
+                                    <form role="form" method="GET" action="Search">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="SearchUsername" type="text" placeholder="Search Username">
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button type="submit" id="SubmitButton" class="btn btn-danger btn-block btn-small">Search</button>
-                                    </div>
-                                     </form>
+                                        <div class="col-md-3">
+                                            <button type="submit" id="Search" class="btn btn-danger btn-block btn-small">Search</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
-                           
+                                </form>
+
                                 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        Last Name:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <form role="form" method="post" action="EditProfileServlet">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            Last Name:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editLastname" value="${aResult.getLastName()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getLastName()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        First Name:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-5">
+                                            First Name:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>  
+                                                    <input class="form-control" id="SearchUsername" name="editFirstname" value="${aResult.getFirstName()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getFirstName()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        MI:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-2">
+                                            MI:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editMI" maxlength="1" value="${aResult.getMI()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getMI()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                            <div class="col-md-5">
-                                        Username:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-6">
+                                            Username:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editUsername" value="${aResult.getUsername()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getUsername()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        Password:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-6">
+                                            Password:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" value="${aResult.getPassword()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getPassword()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        Email Address:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-6">
+                                            Email Address:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editEmail" value="${aResult.getEmailAddress()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getEmailAddress()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        Mobile Number:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-6">
+                                            Mobile Number:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editMobileNumber" value="${aResult.getMobileNumber()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getMobileNumber()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        Delivery Address:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        <div class="col-md-8">
+                                            Delivery Address:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editDeliveryAdd" value="${aResult.getDeliveryAddress()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getDeliveryAddress()}" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        Status:
+                                        <div class="col-md-3">
+                                            Status:
 
-                                        <div class="btn-group">
-                                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account Status<span class="caret"></span></button>
-                                            <ul id="Status" class="dropdown-menu">
-                                                <li selected><a href="#">Locked</a></li>
-                                                <li><a href="#">Unlocked</a></li>
-                                                
-                                            </ul>
-                                        </div>
+                                            <div class="btn-group">
+                                                <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account Status<span class="caret"></span></button>
+                                                <ul id="Status" class="dropdown-menu" name="editStatus">
 
-                                    </div>
-                                    <div class="col-md-8">
-                                        Billing Address:
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    <li><a href="#">Locked</a></li>
+                                                    <li><a href="#">Unlocked</a></li>
+
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            Billing Address:
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="SearchUsername" name="editBillingAdd" value="${aResult.getBillingAddress()}" type="text">
                                                 </div>
-                                                <input class="form-control" id="SearchUsername" value="${aResult.getBillingAddress()}" type="text">
                                             </div>
                                         </div>
-                                     </div>
-                                </div>
-                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
+                                    </div>
+                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Apply</button>
+                                </form>
                             </div>
 
                             <div class="tab-pane text-style" id="AddManager">
@@ -383,54 +386,54 @@
 
                             <div class="tab-pane text-style" id="AddGenre" >
                                 <form role="form" method="post" action="AddGenre">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="ProdTypeName" type="text" name ="ProdType" placeholder="Enter Product Type Name" required>
                                                 </div>
-                                                <input class="form-control" id="ProdTypeName" type="text" name ="ProdType" placeholder="Enter Product Type Name" required>
+                                            </div>
+                                        </div>
+                                        <%
+
+                                            Class.forName("com.mysql.jdbc.Driver");
+                                            Connection connection = DriverManager.getConnection(
+                                                    "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+
+                                            Statement statement = connection.createStatement();
+
+                                            resultset = statement.executeQuery("select userUsername from user where userTypeID = 4");
+
+                                        %>
+
+                                        <div class="col-md-3">
+                                            <div class="btn-group">
+                                                <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product  Manager<span class="caret"></span></button>
+                                                <input type="hidden" id="dropdownselected" name = "ProdManager" value="">
+                                                <ul class="dropdown-menu"> 
+
+                                                    <%  while (resultset.next()) {%>
+                                                    <li><a href="#"><%= resultset.getString(1)%></a></li>
+                                                        <% }%>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                    </div>
+                                                    <input class="form-control" id="ProdDesc" type="text" name = "ProdDesc" placeholder="Enter Product Description" required>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <%
-
-                                        Class.forName("com.mysql.jdbc.Driver");
-                                        Connection connection = DriverManager.getConnection(
-                                                "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-
-                                        Statement statement = connection.createStatement();
-
-                                        resultset = statement.executeQuery("select userUsername from user where userTypeID = 4");
-
-                                    %>
-
-                                    <div class="col-md-3">
-                                        <div class="btn-group">
-                                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product  Manager<span class="caret"></span></button>
-                                            <input type="hidden" id="dropdownselected" name = "ProdManager" value="">
-                                            <ul class="dropdown-menu"> 
-
-                                                <%  while (resultset.next()) {%>
-                                                <li><a href="#"><%= resultset.getString(1)%></a></li>
-                                                <% }%>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                                </div>
-                                                <input class="form-control" id="ProdDesc" type="text" name = "ProdDesc" placeholder="Enter Product Description" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button> 
+                                    <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button> 
                                 </form>
                             </div>
-                            
+
                             <div class="tab-pane text-style" id="CheckLogs">
 
                             </div>
@@ -456,18 +459,25 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
-            
-            
+
+
             $(".dropdown-menu li a").click(function () {
                 var selText = $(this).text();
                 $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
                 $("#dropdownselected").val(selText);
             });
-            
-            
-    
+
+            if ("#Search").click(function() {
+
+                var Status = ${aResult.getStatus()};
+                if (Status === 0) {
+                    $(this).parents('.btn-group').find('.dropdown-toggle').html("Unlocked" + ' <span class="caret"></span>');
+                } else {
+                    $(this).parents('.btn-group').find('.dropdown-toggle').html("Locked" + ' <span class="caret"></span>');
+                }
+            )};
         </script>
 
     </body>
