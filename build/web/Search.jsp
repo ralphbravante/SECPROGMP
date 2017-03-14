@@ -204,10 +204,10 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Author" class="text-center">J.K. Rowling</td>
-                        <td data-th="Genre" class="text-center">Book</td>
-                        <td data-th="Price" class="text-center">$1.99</td>
-                        <td data-th="Rating" class="text-center">4/5</td>
+                        <td data-th="Author" name="Author" class="text-center">J.K. Rowling</td>
+                        <td data-th="Genre" name="Genre" class="text-center">Book</td>
+                        <td data-th="Price" name="Price" class="text-center">$1.99</td>
+                        <td data-th="Rating" name="Rating" class="text-center">4/5</td>
                         <td class="actions" data-th="">
                                 
                             <button class="btn btn-danger btn-sm"><i class="fa fa-shopping-cart"></i>Add to Cart</button>								
