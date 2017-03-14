@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -17,6 +17,7 @@
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
         <link href="css/creative.min.css" rel="stylesheet">
+        <link href="css/cart.css" rel="stylesheet">
 
 
     </head>
@@ -38,6 +39,11 @@
          
 
         }
+        .btn.btn-danger.btn-block.btn-small{
+            border-radius: 4px;
+            width: 80%!important;
+            margin-left: 0px!important;
+        }
         
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
@@ -51,43 +57,55 @@
         #NavPanel{
             width:300px; 
         }
-        
+
         .navbar-default{
             background-color:#333;
         }
-        
+
         #MainContainer{
-            margin-top: 150px;
+            margin-top: 100px;
             margin-left: 20px;
         }
-        .tab-content{
-            padding:20px;
-        }
         
-        .jumbotron{
-            margin-top: 100px;
-            padding-top:20px;
+
+        .btn.btn-default.dropdown-toggle{
+            border-radius: 0px;
+            background-color:none;
+            margin-bottom: 0px;
+            font-weight: normal;
+            width:100%;
+            text-transform: none;
         }
+        .dropdown-menu{
+            text-align: center;
+            width:165px;
+        }
+        .btn-group{
+
+            font-weight: normal;
+            width:100%;
+            text-transform: none;
+            background-color:white;
+            margin-bottom: 0px;
+
+        }
+      
+        
         
         .btn{
             border-radius: 4px;
             font-weight: normal;
         }
+       
         
         
-        .panel.panel-default{
-            padding-left: 20px;
-            padding-right: 20px;
-        }
         
-        .alert{
-            display: none;
-        }
         
   
     </style>
 
     <body>
+
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -130,80 +148,73 @@
         </nav>
 
         
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Welcome to CSBookstore!</h1>
-                <p>The only online bookstore you'll ever need.</p>
-                <br>
-                <p><a class="btn btn-primary btn-lg" href="Search.jsp" role="button">Search for our products here</a></p>
-            </div>
-            <hr>
-            
-            <div class="panel panel-default">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h3>Featured Items</h3>
-                    </div>
-                </div>
+        <div class="container" id="MainContainer">
+            <div class="row">
+
+                <div class="col-md-4"></div>
                 
-                <div class="row text-center">
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>  
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </div>
+                            <input class="form-control" id="Search" name="Search" type="text" placeholder="Search here">
                         </div>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div> 
                 </div>
+   
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <button href="#" id="AccountStatus" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Genre<span class="caret"></span></button>
+                        <ul id="Status" class="dropdown-menu">
+                            
+                            <li><a href="#">Books</a></li>
+                            <li><a href="#">DVDs</a></li>
+                            <li><a href="#">CDs</a></li>
+                            <li><a href="#">Magazines</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </div>
+
+        <div class="container">
+            <div class="panel panel-default">
+                <table id="cart" class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width:50%">Product</th>
+                            <th style="width:10%" class="text-center">Author</th>
+                            <th style="width:10%" class="text-center">Genre</th>
+                            <th style="width:10%" class="text-center">Price</th>
+                            <th style="width:8%" class="text-center">Rating</th>
+                            <th style="width:12%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-4 hidden-xs"><img src="http://placehold.it/140x140" alt="..." class="img-responsive"/></div>
+                                <div class="col-sm-8">
+                                    <h4 class="nomargin">Harry Potter</h4>
+                                    <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Author" class="text-center">J.K. Rowling</td>
+                        <td data-th="Genre" class="text-center">Book</td>
+                        <td data-th="Price" class="text-center">$1.99</td>
+                        <td data-th="Rating" class="text-center">4/5</td>
+                        <td class="actions" data-th="">
+                                
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-shopping-cart"></i>Add to Cart</button>								
+                        </td>
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
         
@@ -217,5 +228,17 @@
         <script src="js/validator.js"></script>
 
     </body>
+
+    <script>   
+       
+         $("#AccountStatus li a").click(function () {
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            $("#dropdownselected").val(selText);
+        });
+        
+       
+        
+    </script>
 
 </html>
