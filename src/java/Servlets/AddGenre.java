@@ -1,7 +1,12 @@
+package Servlets;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ralph
+ * @author Miguel Cruz
  */
-@WebServlet(urlPatterns = {"/Search"})
-public class Search extends HttpServlet {
+@WebServlet(urlPatterns = {"/AddGenre"})
+public class AddGenre extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +37,10 @@ public class Search extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Search</title>");            
+            out.println("<title>Servlet AddGenre</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Search at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddGenre at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,31 +58,7 @@ public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-        String username = request.getParameter("SearchUsername");
-        System.out.println("this is the content of search bar " + username);
-        Accounts aResult = AccountServices.getAccount(username);
-
-        if(aResult != null){
-            System.out.println("userID is   as;dkfjalsjflaksdjflkasjdjfajsdkf      ###### " + aResult.getID());
-            System.out.println("lastname:" + aResult.getLastName());
-            System.out.println("firstname:" + aResult.getFirstName());
-            System.out.println("mi:" + aResult.getMI());
-            System.out.println("username:" + aResult.getUsername());
-            System.out.println("password:" + aResult.getPassword());
-            System.out.println("mobilenumber:" + aResult.getMobileNumber());
-            System.out.println("email:" + aResult.getEmailAddress());
-            System.out.println("billadd:" + aResult.getBillingAddress());
-            System.out.println("deladd:" + aResult.getDeliveryAddress());
-            System.out.println("staus:" + aResult.getStatus());
-            
-        }
-        
-        request.setAttribute("aResult", aResult);
-        request.getRequestDispatcher("/Admin.jsp").forward(request, response);
-        
+        processRequest(request, response);
     }
 
     /**
@@ -91,7 +72,61 @@ public class Search extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        String ProdType = request.getParameter("ProdType");
+        String ProdDesc = request.getParameter("ProdDesc");
+        String ProdManager = request.getParameter("ProdManager");
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+        System.out.println(ProdManager);
+        pst = connection.prepareStatement("select userID from user where userUsername = ?");
+        pst.setString(1, ProdManager);
+        rs = pst.executeQuery();
+        rs.next();
+        int userID = rs.getInt(1);
+        
+        
+        
+        
+        pst = connection.prepareStatement("insert into producttype (userID, prodType, prodDesc) values (?,?,?)");
+        pst.setInt(1, userID);
+        pst.setString(2, ProdType);
+        pst.setString(3, ProdDesc);
+        pst.executeUpdate();
+        
+        
+        
+        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        
+        
+        
+        request.getRequestDispatcher("Admin.jsp").forward(request, response);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     /**

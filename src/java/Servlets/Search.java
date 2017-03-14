@@ -1,7 +1,11 @@
+package Servlets;
 
+
+import Services.AccountServices;
+import Beans.Accounts;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ralph
  */
-@WebServlet(urlPatterns = {"/ProductServlet"})
-public class AddProductServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/Search"})
+public class Search extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +36,10 @@ public class AddProductServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductServlet</title>");            
+            out.println("<title>Servlet Search</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Search at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +57,31 @@ public class AddProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+        String username = request.getParameter("SearchUsername");
+        System.out.println("this is the content of search bar " + username);
+        Accounts aResult = AccountServices.getAccount(username);
+
+        if(aResult != null){
+            System.out.println("userID is   as;dkfjalsjflaksdjflkasjdjfajsdkf      ###### " + aResult.getID());
+            System.out.println("lastname:" + aResult.getLastName());
+            System.out.println("firstname:" + aResult.getFirstName());
+            System.out.println("mi:" + aResult.getMI());
+            System.out.println("username:" + aResult.getUsername());
+            System.out.println("password:" + aResult.getPassword());
+            System.out.println("mobilenumber:" + aResult.getMobileNumber());
+            System.out.println("email:" + aResult.getEmailAddress());
+            System.out.println("billadd:" + aResult.getBillingAddress());
+            System.out.println("deladd:" + aResult.getDeliveryAddress());
+            System.out.println("staus:" + aResult.getStatus());
+            
+        }
+        
+        request.setAttribute("aResult", aResult);
+        request.getRequestDispatcher("/Admin.jsp").forward(request, response);
+        
     }
 
     /**
@@ -68,25 +96,6 @@ public class AddProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        String prodName = request.getParameter("prodName");
-        String prodType = request.getParameter("prodType");
-        String prodDesc = request.getParameter("prodDesc");
-        int prodCount = Integer.parseUnsignedInt(request.getParameter("prodCount"));
-        float prodPrice = Float.parseFloat(request.getParameter("prodPrice"));
-        String prodBy = request.getParameter("prodBy");
-        
-        DBAccess DB = new DBAccess();
-        
-        try{
-           DB.AddData("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodCount`, `prodPrice`, `prodBy`) VALUES ('"+ prodName +"', '"+ prodType +"', '"+ prodDesc +"', '"+ prodCount +"', '"+ prodPrice +"', '"+ prodBy +"');");
-         }catch(Exception ex){ 
-            ex.printStackTrace();
-           
-        }
-        
-        request.getRequestDispatcher("Manager.jsp");
-        
     }
 
     /**

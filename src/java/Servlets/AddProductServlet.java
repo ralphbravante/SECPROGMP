@@ -1,10 +1,10 @@
+package Servlets;
 
+
+import DB.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.security.MessageDigest;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Miguel Cruz
+ * @author ralph
  */
-@WebServlet(urlPatterns = {"/AddGenre"})
-public class AddGenre extends HttpServlet {
+@WebServlet(urlPatterns = {"/ProductServlet"})
+public class AddProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +35,10 @@ public class AddGenre extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddGenre</title>");            
+            out.println("<title>Servlet ProductServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddGenre at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ProductServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,60 +70,25 @@ public class AddGenre extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
         
+        String prodName = request.getParameter("prodName");
+        String prodType = request.getParameter("prodType");
+        String prodDesc = request.getParameter("prodDesc");
+        int prodCount = Integer.parseUnsignedInt(request.getParameter("prodCount"));
+        float prodPrice = Float.parseFloat(request.getParameter("prodPrice"));
+        String prodBy = request.getParameter("prodBy");
         
-        String ProdType = request.getParameter("ProdType");
-        String ProdDesc = request.getParameter("ProdDesc");
-        String ProdManager = request.getParameter("ProdManager");
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-        System.out.println(ProdManager);
-        pst = connection.prepareStatement("select userID from user where userUsername = ?");
-        pst.setString(1, ProdManager);
-        rs = pst.executeQuery();
-        rs.next();
-        int userID = rs.getInt(1);
+        DBAccess DB = new DBAccess();
         
-        
-        
-        
-        pst = connection.prepareStatement("insert into producttype (userID, prodType, prodDesc) values (?,?,?)");
-        pst.setInt(1, userID);
-        pst.setString(2, ProdType);
-        pst.setString(3, ProdDesc);
-        pst.executeUpdate();
-        
-        
-        
-        
-        } catch (Exception ex) {
+        try{
+           DB.AddData("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodCount`, `prodPrice`, `prodBy`) VALUES ('"+ prodName +"', '"+ prodType +"', '"+ prodDesc +"', '"+ prodCount +"', '"+ prodPrice +"', '"+ prodBy +"');");
+         }catch(Exception ex){ 
             ex.printStackTrace();
-
+           
         }
         
-        
-        
-        request.getRequestDispatcher("Admin.jsp").forward(request, response);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        request.getRequestDispatcher("Manager.jsp");
         
     }
 

@@ -87,14 +87,14 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">CSBookstore</a>
+                    <a class="navbar-brand page-scroll" href="Login.jsp">CSBookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="Login.html">Home</a></li> 
-                        <li><a href="Login.html">Login</a></li> 
+                        <li><a href="Login.jsp">Home</a></li> 
+                        <li><a href="Login.jsp">Login</a></li> 
                     </ul>
                 </div>
                 
@@ -111,7 +111,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form data-toggle="validator" role="form" method="post" action="Register">
-                        <legend></legend>
+                        <legend>User Info:</legend>
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">

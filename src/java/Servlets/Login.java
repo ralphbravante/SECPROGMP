@@ -1,4 +1,7 @@
+package Servlets;
 
+
+import DB.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -45,7 +48,8 @@ public class Login extends HttpServlet {
         String username = request.getParameter("Username");
         String password = request.getParameter("Password");
 
-        DBAccess DB = new DBAccess();
+        DBAccess DB;
+        DB = new DBAccess();
 
         PreparedStatement pst = null;
         ResultSet rs = null;
