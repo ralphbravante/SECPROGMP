@@ -165,7 +165,7 @@
    
                 <div class="col-md-2">
                     <div class="btn-group">
-                        <button href="#" id="AccountStatus" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Genre<span class="caret"></span></button>
+                        <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Genre<span class="caret"></span></button>
                         <ul id="Status" class="dropdown-menu">
                             
                             <li><a href="#">Books</a></li>
@@ -231,7 +231,7 @@
 
     <script>   
        
-         $("#AccountStatus li a").click(function () {
+         $(".dropdown-menu li a").click(function () {
             var selText = $(this).text();
             $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
             $("#dropdownselected").val(selText);

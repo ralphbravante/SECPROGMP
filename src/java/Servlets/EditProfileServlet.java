@@ -2,6 +2,8 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -75,53 +77,68 @@ public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-
-        String lastname = request.getParameter("editLastname");
-        String firstname = request.getParameter("editFirstname");
-        String MI = request.getParameter("editMI");
-        String username = request.getParameter("editUsername");
-        String email = request.getParameter("editEmail");
-        String mobileNum = request.getParameter("editMobileNumber");
-        String deliveryAdd = request.getParameter("editDeliveryAdd");
-        String billingAdd = request.getParameter("editBillingAdd");
-        int status =  Integer.parseInt(request.getParameter("editStatus"));
-        String presentUsername = request.getParameter("presentUsername");
-        
-        PreparedStatement pst = null;
-        String userName = null;
-        System.out.println("THis is the status of the user  " + status);
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-
-            pst = connection.prepareStatement("UPDATE `secprog`.`user` SET userLast=? , userFirst=?, userMI=?, userUsername=?, userEmail=?, userBillingAdd=?, userDeliveryAdd=?, userContactNum=?, userStatus=?, userEditDateTime=? WHERE userUsername = ?;");
-            java.util.Date dt = new java.util.Date();
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String currentTime = sdf.format(dt);
-
-            System.out.println("THIS IS THE ATTRBUTE OF SESSION!!!! " + presentUsername);
-
-            pst.setString(1, lastname);
-            pst.setString(2, firstname);
-            pst.setString(3, MI);
-            pst.setString(4, username);
-            pst.setString(5, email);
-            pst.setString(6, billingAdd);
-            pst.setString(7, deliveryAdd);
-            pst.setString(8, mobileNum);
-            pst.setInt(9, status);
-            pst.setString(10, currentTime);
-            pst.setString(11,  presentUsername);
-            pst.executeUpdate();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            //processRequest(request, response);
+            
+            String lastname = request.getParameter("editLastname");
+            String firstname = request.getParameter("editFirstname");
+            String MI = request.getParameter("editMI");
+            String username = request.getParameter("editUsername");
+            String email = request.getParameter("editEmail");
+            String mobileNum = request.getParameter("editMobileNumber");
+            String deliveryAdd = request.getParameter("editDeliveryAdd");
+            String billingAdd = request.getParameter("editBillingAdd");
+            int status =  Integer.parseInt(request.getParameter("editStatus"));
+            String presentUsername = request.getParameter("presentUsername");
+            String password = request.getParameter("editPassword");
+            
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            byte[] bytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            String generatedPassword = sb.toString();
+            
+            PreparedStatement pst = null;
+            String userName = null;
+            System.out.println("THis is the status of the user  " + status);
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+                
+                pst = connection.prepareStatement("UPDATE `secprog`.`user` SET userLast=? , userFirst=?, userMI=?, userUsername=?, userEmail=?, userBillingAdd=?, userDeliveryAdd=?, userContactNum=?, userStatus=?, userEditDateTime=? userPassword=? WHERE userUsername = ?;");
+                java.util.Date dt = new java.util.Date();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTime = sdf.format(dt);
+                
+                System.out.println("THIS IS THE ATTRBUTE OF SESSION!!!! " + presentUsername);
+                
+                pst.setString(1, lastname);
+                pst.setString(2, firstname);
+                pst.setString(3, MI);
+                pst.setString(4, username);
+                pst.setString(5, email);
+                pst.setString(6, billingAdd);
+                pst.setString(7, deliveryAdd);
+                pst.setString(8, mobileNum);
+                pst.setInt(9, status);
+                pst.setString(10, currentTime);
+                pst.setString(11, generatedPassword);
+                pst.setString(11,  presentUsername);
+                pst.executeUpdate();
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            request.getRequestDispatcher("Admin.jsp").forward(request, response);
+            
+        } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        request.getRequestDispatcher("Admin.jsp").forward(request, response);
 
     }
 

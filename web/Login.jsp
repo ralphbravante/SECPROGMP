@@ -331,6 +331,7 @@
 
                         <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">LOGIN</button><br>
                         <p>Don't have an Account? <a href="Register.jsp">Sign Up Now!</a></p>
+                        <p><a href="Recover.jsp">Forgot Password?</a></p>
                     </div>
                 </div>
             </div>

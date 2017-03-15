@@ -147,6 +147,7 @@
                             <ul class="dropdown-menu" style="text-align:right;">
                                 <li><a href="Settings.jsp">Account Settings</a></li>
                                 <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
+                                
                             </ul>
                         </li>
 
@@ -250,9 +251,9 @@
                                             Password:
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    <div class="input-group-addon"><span class="glyphicon glyphicon-" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="SearchUsername" value="${aResult.getPassword()}" type="text">
+                                                    <input class="form-control" id="SearchUsername" name="editPassword" value="${aResult.getPassword()}" type="password">
                                                 </div>
                                             </div>
                                         </div>
@@ -272,7 +273,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                     </div>
-                                                    <input class="form-control" id="SearchUsername" name="editMobileNumber" value="${aResult.getMobileNumber()}" type="text">
+                                                    <input class="form-control" id="SearchUsername" name="editMobileNumber" maxlength = "11" value="${aResult.getMobileNumber()}" type="text">
                                                 </div>
                                             </div>
                                         </div>

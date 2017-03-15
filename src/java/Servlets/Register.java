@@ -85,12 +85,7 @@ public class Register extends HttpServlet {
             rs.next();
             userID = rs.getInt(1);  
 
-            pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
-            pst.setInt(1, userID);
-            pst.setString(2, "Success");
-            pst.setString(3, currentTime);
-            pst.setInt(4, 0);
-            pst.executeUpdate();
+            
 
         } catch (Exception ex) {
             ex.printStackTrace();
