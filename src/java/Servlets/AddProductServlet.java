@@ -3,10 +3,11 @@ package Servlets;
 import DB.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,24 +76,22 @@ public class AddProductServlet extends HttpServlet {
         //processRequest(request, response);
         
         String prodName = request.getParameter("ProdName");
-        String prodType = null;
         String prodDesc = request.getParameter("ProdDesc");
         int prodCount = Integer.parseInt(request.getParameter("ProdCount"));
         float prodPrice = Float.parseFloat(request.getParameter("ProdPrice"));
-        
-        
+        String prodType = request.getParameter("prodType");
+        int userID=-1;
         
         DBAccess DB = new DBAccess();
         PreparedStatement pst = null;
+        ResultSet rs = null;
+        
+        System.out.println(prodType);
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
             
-            pst = connection.prepareStatement("select userID from user order by userID desc");
-            rs = pst.executeQuery();
-            rs.next();
-            userID = rs.getInt(1);
             
             pst = connection.prepareStatement("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodCount`, `prodPrice`, `prodRestockDateTime`) VALUES (?, ?, ?, ?, ?, ?);");
             pst.setString(1, prodName);
@@ -110,9 +109,7 @@ public class AddProductServlet extends HttpServlet {
             
             pst.executeUpdate();
             
-        } catch (Exception ex) {            
-            ex.printStackTrace();
-            
+        } catch (ClassNotFoundException | SQLException ex) {            
         }
         
         request.getRequestDispatcher("ProductManager.jsp").forward(request, response);

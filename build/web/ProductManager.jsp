@@ -1,3 +1,11 @@
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%ResultSet resultset = null;%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -156,7 +164,7 @@
             <div class="panel panel-default"> 
                 <form data-toggle="validator" role="form" method="POST" action="ProductServlet">
                     <legend>Add New Product:</legend>
-
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -173,12 +181,21 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <button href="#" class="btn btn-default dropdown-toggle align-right" name="ProdType" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product Type<span class="caret"></span></button>
-                            <ul class="dropdown-menu"> 
-                                <li><a href="#" value="Book">Book</a></li>
-                                <li><a href="#" value="CD">CD</a></li>
-                                <li><a href="#" value="DVD">DVD</a></li>
-                            </ul>
+                            <%
+                        
+                                           Class.forName("com.mysql.jdbc.Driver");
+                                            Connection connection = DriverManager.getConnection(
+                                                    "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+                                            
+                                            PreparedStatement pst = null;
+                                            System.out.println("This is the username in product manager" + userName);
+                                            pst= connection.prepareStatement("select prodType from producttype where userID=(select userID from user where user.userUsername=? );");
+                                            pst.setString(1, userName);
+                                            resultset = pst.executeQuery();
+                                        %>
+                            <%  while (resultset.next()) {%>
+                            <input type="hidden" name="prodType" value="<%= resultset.getString(1)%>">
+                            <% }%>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
