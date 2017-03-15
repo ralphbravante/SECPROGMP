@@ -80,6 +80,7 @@ public class AddGenre extends HttpServlet {
         PreparedStatement pst = null;
         ResultSet rs = null;
         int userID = -1;
+        System.out.println("This is the username of prod manager " + ProdManager);
         try {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
@@ -87,7 +88,6 @@ public class AddGenre extends HttpServlet {
         pst = connection.prepareStatement("select userID from user where userUsername = ?");
         pst.setString(1, ProdManager);
         rs = pst.executeQuery();
-        rs.next();
         if(rs.next()){
              userID = rs.getInt(1);
         }

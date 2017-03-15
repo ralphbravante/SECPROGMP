@@ -424,7 +424,7 @@
 
                                             Statement statement = connection.createStatement();
 
-                                            resultset = statement.executeQuery("select userUsername from user where userTypeID = 4");
+                                            resultset = statement.executeQuery(" select distinct user.userUsername from user where user.userID NOT in  (select distinct productType.userID from productType) AND user.userTypeID=4;");
 
                                         %>
 
