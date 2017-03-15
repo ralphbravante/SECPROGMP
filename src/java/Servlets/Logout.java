@@ -1,6 +1,5 @@
 package Servlets;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,35 +12,91 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Beep xD
+ * @author ralph
  */
-@WebServlet(urlPatterns = {"/Logout"})
+@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
 public class Logout extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Logout</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie[] cookieList = request.getCookies();
-
-        for (int i = 0; i < cookieList.length; i++) {
-
-            Cookie c = cookieList[i];
-
-            if ("Username".equals(c.getName())) {
-
-                c.setMaxAge(0);
-
-                response.addCookie(c);
-
-            }
-
-        }
-        //eat the cookie
-
-        //kill the session
-        request.getSession().invalidate();
-
-        //redirect the user to login.jsp
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        processRequest(request, response);
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);
+        
+        Cookie[] cookies = request.getCookies();
+    	if(cookies != null){
+    	for(Cookie cookie : cookies){
+    		if(cookie.getName().equals("JSESSIONID")){
+    			System.out.println("JSESSIONID="+cookie.getValue());
+    			break;
+    		}
+    	}
+    	}
+    	//invalidate the session if exists
+    	HttpSession session = request.getSession(false);
+    	System.out.println("User="+session.getAttribute("name"));
+    	if(session != null){
+    		session.invalidate();
+    	}
+    	response.sendRedirect("Login.jsp");
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

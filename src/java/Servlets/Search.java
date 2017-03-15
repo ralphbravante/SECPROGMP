@@ -80,7 +80,7 @@ public class Search extends HttpServlet {
         }
         
         request.setAttribute("aResult", aResult);
-        request.getRequestDispatcher("/Admin.jsp").forward(request, response);
+        request.getRequestDispatcher("Admin.jsp").forward(request, response);
         
     }
 

@@ -108,7 +108,28 @@
     </style>
 
     <body>
-
+               <%
+//allow access only if session exists
+            String user = null;
+            if (session.getAttribute("name") == null) {
+                response.sendRedirect("Login.jsp");
+            } else {
+                user = (String) session.getAttribute("name");
+            }
+            String userName = null;
+            String sessionID = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("Username")) {
+                        userName = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("JSESSIONID")) {
+                        sessionID = cookie.getValue();
+                    }
+                }
+            }
+        %>  
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -123,7 +144,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Manager!</a>
+                            <a>Hello, <%=userName%>!</a>
                         </li>
                         
                         <li class="dropdown">
@@ -132,7 +153,7 @@
                                 
                                 
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="Login.jsp">Logout</a></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
                             </ul>
                         </li>
                         

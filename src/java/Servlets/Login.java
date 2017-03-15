@@ -1,6 +1,5 @@
 package Servlets;
 
-
 import DB.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,62 +41,70 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        String username = request.getParameter("Username");
-        String password = request.getParameter("Password");
-
-        DBAccess DB;
-        DB = new DBAccess();
-
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        int count = 1;
-        int userType = 0;
-        int userAttemptCount = 0;
-        boolean valid = false;
-
-        java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentTime = sdf.format(dt);
-
         try {
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            String Username = request.getParameter("Username");
+            String Password = request.getParameter("Password");
+            DBAccess DB;
+            DB = new DBAccess();
+            PreparedStatement pst = null, pst2 = null;
+            ResultSet rs = null, rs2 = null, rs3 = null;
+            //int count = 1;
+            //int userType = 0;
+            //int userAttemptCount = 0;
+            boolean valid = false;
+            boolean exists = false;
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
+
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            byte[] bytes = md.digest(Password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            String generatedPassword = sb.toString();
 
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-
-            pst = connection.prepareStatement("select userUsername, userID, userTypeID, userStatus from user where userUsername = ?");
-            pst.setString(1, username);
+            pst = connection.prepareStatement("select userUsername, userID, userTypeID, userStatus, userPassword from user where userUsername = ?;");
+            pst.setString(1, Username);
             rs = pst.executeQuery();
+            pst2 = connection.prepareStatement("select userUsername, userID, userTypeID, userStatus, userPassword from user where userPassword = ?;");
+            pst2.setString(1, generatedPassword);
+            rs2 = pst2.executeQuery();
+            System.out.println("PASOK NAMAN22");
 
-            if (rs.next()) {
+            if (rs.next() && rs2.next()) {
+                HttpSession session = request.getSession();
+                session.setAttribute("name", Username);
+                System.out.println("SESSION NAME1: " + (String) session.getAttribute("name"));
+                //setting session to expiry in 30 mins
+                session.setMaxInactiveInterval(60 * 60);
+                System.out.println("SESSION NAME2: " + (String) session.getAttribute("name"));
+                Cookie userName = new Cookie("Username", Username);
+                System.out.println("SESSION NAME3: " + (String) session.getAttribute("name"));
+                userName.setMaxAge(60 * 60);
+                response.addCookie(userName);
+                System.out.println("SESSION NAME4: " + (String) session.getAttribute("name"));
+                //*************IMPORTANT**********response.sendRedirect("LoginSuccess.jsp");
+                System.out.println("SESSION ID:" + session.getId());
+                System.out.println("SESSION NAME5: " + (String) session.getAttribute("name"));
+                System.out.println("SESSION CREATED TIME: " + session.getCreationTime());
+
                 int userID = rs.getInt(2);
                 int userTypeID = rs.getInt(3);
                 int userStatus = rs.getInt(4);
-                boolean exists = true;
-                MessageDigest md = MessageDigest.getInstance("SHA-1");
-                byte[] bytes = md.digest(password.getBytes());
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < bytes.length; i++) {
-                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-                }
-                String generatedPassword = sb.toString();
-
-                pst = connection.prepareStatement("select userID from user where userUsername = ? and userPassword = ?");
-                pst.setString(1, username);
-                pst.setString(2, generatedPassword);
-                rs = pst.executeQuery();
-                if (rs.next()) {
-                    exists = true;
-                    userID = rs.getInt(1);
-                    valid = true;
-                }
+                int aCount = 0;
+                exists = true;
+                valid = true;
 
                 System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
 
-                if (exists && userStatus == 0 && valid) {
+                if (userStatus == 0) {
                     pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
                     pst.setInt(1, userID);
                     pst.setString(2, "Success");
@@ -105,59 +112,115 @@ public class Login extends HttpServlet {
                     pst.setInt(4, 0);
                     pst.executeUpdate();
 
+                    aCount = rs.getInt(4);
+
                     RequestDispatcher rd;
-                  
-                    if(userTypeID == 1){
-                        rd = request.getRequestDispatcher("Customer.jsp");
-                        rd.forward(request, response);
-                    }else if(userTypeID == 2){
-                        rd = request.getRequestDispatcher("Admin.jsp");
-                        rd.forward(request, response);
-                    }else if(userTypeID == 3){
-                        rd = request.getRequestDispatcher("FinancialManager.jsp");
-                        rd.forward(request, response);
-                    }else if (userTypeID >= 4){
-                        rd = request.getRequestDispatcher("ProductManager.jsp");
-                        rd.forward(request, response);
+                    System.out.print("PASOK1");
+                    if (userTypeID == 1) {
+                        System.out.print("PASOK2");
+                        response.sendRedirect("Customer.jsp");
+                    } else if (userTypeID == 2) {
+                        response.sendRedirect("Admin.jsp");
+                    } else if (userTypeID == 3) {
+                        response.sendRedirect("FinancialManager.jsp");
+                    } else if (userTypeID >= 4) {
+                        response.sendRedirect("ProductManager.jsp");
                     }
-                } else if (exists && userStatus == 1 && valid) {
+                } else if (userStatus == 1) {
                     //Request to UNLOCK page
                     pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
                     pst.setInt(1, userID);
-                    pst.setString(2, "Locked");
+                    pst.setString(2, "Failed/Locked");
                     pst.setString(3, currentTime);
-                    pst.setInt(4, 0);
+                    pst.setInt(4, aCount);
                     pst.executeUpdate();
-                    
-                    request.getRequestDispatcher("Login.jsp").forward(request, response);
-                    
-                } else {
-                    System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
-                    pst = connection.prepareStatement("select userAttemptCount, loginTimeStamp from userlogins where userID = ? order by loginTimeStamp desc");
-                    pst.setInt(1, userID);
-                    rs = pst.executeQuery();
-                    rs.next();
-                    int latestAttemptCount = rs.getInt(1);
-                    
-                    latestAttemptCount = latestAttemptCount + 1;
-                    
-                    pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
-                    pst.setInt(1, userID);
-                    pst.setString(2, "Failed");
-                    pst.setString(3, currentTime);
-                    pst.setInt(4, latestAttemptCount);
-                    pst.executeUpdate();
-                    
-                    request.getRequestDispatcher("Login.jsp").forward(request, response);
-                }
-            } else {
-                //ACCOUNT DOES NOT EXIST
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
-            }
 
-        } catch (ClassNotFoundException | SQLException | NoSuchAlgorithmException ex) {
+                    out.println("<script type=\"text/javascript\">");
+                            out.println("alert('Your account is locked, change password via email.');");
+                            out.println("location='Login.jsp';");
+                            out.println("</script>");
+
+                }
+            } else if (!(rs2.next()) && rs.isFirst()) {
+                System.out.println("PASOK NAMAN KASI TALGA");
+                
+                    System.out.println("PASOK NAMAN");
+
+                    int userID = rs.getInt(2);
+                    System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
+                    pst = connection.prepareStatement("select userAttemptCount, loginTimeStamp from userlogins where userid=? AND Status like '%Failed%' order by loginTimeStamp desc;");
+                    pst.setInt(1, userID);
+                    rs3 = pst.executeQuery();
+                    int latestAttemptCount = 0;
+                    if (rs3.next()) {
+                        latestAttemptCount = rs3.getInt(1);
+
+                        if (latestAttemptCount < 5) {
+                            latestAttemptCount = latestAttemptCount + 1;
+
+                            pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                            pst.setInt(1, userID);
+                            pst.setString(2, "Failed");
+                            pst.setString(3, currentTime);
+                            pst.setInt(4, latestAttemptCount);
+                            pst.executeUpdate();
+
+                            out.println("<script type=\"text/javascript\">");
+                            out.println("alert('Username or password incorrect');");
+                            out.println("location='Login.jsp';");
+                            out.println("</script>");
+
+                        } else if (latestAttemptCount >= 5) {
+                            //Insert Captcha here
+                            pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                            pst.setInt(1, userID);
+                            pst.setString(2, "Failed/Locked");
+                            pst.setString(3, currentTime);
+                            pst.setInt(4, latestAttemptCount);
+                            pst.executeUpdate();
+                            
+                            pst2 = connection.prepareStatement("update  user SET `userStatus` = ? WHERE userID = ?; ");
+                            pst2.setInt(1, 1);
+                            pst2.setInt(2, userID);
+                            pst2.executeUpdate();
+                           
+
+                            out.println("<script type=\"text/javascript\">");
+                            out.println("alert('Your account is locked, change password via email.');");
+                            out.println("location='Login.jsp';");
+                            out.println("</script>");
+
+                        }
+                    } else if (!(rs3.next())) {
+                        pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                        pst.setInt(1, userID);
+                        pst.setString(2, "Failed");
+                        pst.setString(3, currentTime);
+                        pst.setInt(4, 1);
+                        pst.executeUpdate();
+
+                        out.println("<script type=\"text/javascript\">");
+                        out.println("alert('Username or password incorrect');");
+                        out.println("location='Login.jsp';");
+                        out.println("</script>");
+
+                    }
+                
+            } else {
+                System.out.println("asldkjashfqwerqiewjgaklsdg;jhasepofaisdjfhliue;krqjwemofiahsfgap'sodfuasdfkj");
+                //ACCOUNT DOES NOT EXIST
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Account does not exist!');");
+                out.println("location='Login.jsp';");
+                out.println("</script>");
+
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }

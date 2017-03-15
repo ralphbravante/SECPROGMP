@@ -79,6 +79,7 @@ public class AddGenre extends HttpServlet {
         String ProdManager = request.getParameter("ProdManager");
         PreparedStatement pst = null;
         ResultSet rs = null;
+        int userID = -1;
         try {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
@@ -87,8 +88,9 @@ public class AddGenre extends HttpServlet {
         pst.setString(1, ProdManager);
         rs = pst.executeQuery();
         rs.next();
-        int userID = rs.getInt(1);
-        
+        if(rs.next()){
+             userID = rs.getInt(1);
+        }
         
         
         

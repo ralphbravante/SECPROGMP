@@ -20,42 +20,42 @@
 
 
     </head>
-    
+
     <style>  
-        
+
         .input-group{
             width:100%;
         }
-        
+
         #SubmitButton{
             margin-right: auto;
             margin-left: auto;
             width: 50%;
         }
-        
+
         .btn.btn-danger.btn-block{
-          background-color: #F05F40;
-         
+            background-color: #F05F40;
+
 
         }
-        
+
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
             background-image: url("img/pic1.jpeg");
             background-size:100%;
             background-repeat: no-repeat;
             height:auto;
-            
+
         }
-    
+
         #NavPanel{
             width:300px; 
         }
-        
+
         .navbar-default{
             background-color:#333;
         }
-        
+
         #MainContainer{
             margin-top: 150px;
             margin-left: 20px;
@@ -63,31 +63,54 @@
         .tab-content{
             padding:20px;
         }
-        
+
         .jumbotron{
             margin-top: 100px;
             padding-top:20px;
         }
-        
+
         .btn{
             border-radius: 4px;
             font-weight: normal;
         }
-        
-        
+
+
         .panel.panel-default{
             padding-left: 20px;
             padding-right: 20px;
         }
-        
+
         .alert{
             display: none;
         }
-        
-  
+
+
     </style>
 
     <body>
+
+        <%
+//allow access only if session exists
+            String user = null;
+            if (session.getAttribute("name") == null) {
+                response.sendRedirect("Login.jsp");
+            } else {
+                user = (String) session.getAttribute("name");
+            }
+            String userName = null;
+            String sessionID = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("Username")) {
+                        userName = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("JSESSIONID")) {
+                        sessionID = cookie.getValue();
+                    }
+                }
+            }
+        %>
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -103,33 +126,33 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Customer!</a>
+                            <a>Hello, <%=userName %>!</a>
                         </li>
                         <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart(0)</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                
-                                
-                                <li><a href="Settings.html">Account Info</a></li>
+
+
+                                <li><a href="Settings.jsp">Account Info</a></li>
                                 <li><a href="#">Payment Info</a></li>
                                 <li><a href="#">Purchase History</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
-                
-                
-                
-                
+
+
+
+
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
 
-        
+
         <div class="container">
             <div class="jumbotron">
                 <h1>Welcome to CSBookstore!</h1>
@@ -138,14 +161,14 @@
                 <p><a class="btn btn-primary btn-lg" href="Search.jsp" role="button">Search for our products here</a></p>
             </div>
             <hr>
-            
+
             <div class="panel panel-default">
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>Featured Items</h3>
                     </div>
                 </div>
-                
+
                 <div class="row text-center">
                     <div class="col-md-3">
                         <div class="thumbnail">
@@ -155,13 +178,13 @@
                                 <p>Description Here...</p>
                                 <p>
                                     <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    
+
                                     <button type="button" class="btn btn-warning">More Info</button>
                                 </p>
                             </div>  
                         </div>
                     </div>
-                    
+
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <img src="http://placehold.it/800x500" alt="">
@@ -175,7 +198,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <img src="http://placehold.it/800x500" alt="">
@@ -189,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <img src="http://placehold.it/800x500" alt="">
@@ -206,7 +229,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -1,10 +1,12 @@
 package Servlets;
 
-
 import DB.DBAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,25 +72,50 @@ public class AddProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
         
-        String prodName = request.getParameter("prodName");
-        String prodType = request.getParameter("prodType");
-        String prodDesc = request.getParameter("prodDesc");
-        int prodCount = Integer.parseUnsignedInt(request.getParameter("prodCount"));
-        float prodPrice = Float.parseFloat(request.getParameter("prodPrice"));
-        String prodBy = request.getParameter("prodBy");
+        String prodName = request.getParameter("ProdName");
+        String prodType = null;
+        String prodDesc = request.getParameter("ProdDesc");
+        int prodCount = Integer.parseInt(request.getParameter("ProdCount"));
+        float prodPrice = Float.parseFloat(request.getParameter("ProdPrice"));
+        
+        
         
         DBAccess DB = new DBAccess();
+        PreparedStatement pst = null;
         
-        try{
-           DB.AddData("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodCount`, `prodPrice`, `prodBy`) VALUES ('"+ prodName +"', '"+ prodType +"', '"+ prodDesc +"', '"+ prodCount +"', '"+ prodPrice +"', '"+ prodBy +"');");
-         }catch(Exception ex){ 
-            ex.printStackTrace();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
+            
+            pst = connection.prepareStatement("select userID from user order by userID desc");
+            rs = pst.executeQuery();
+            rs.next();
+            userID = rs.getInt(1);
+            
+            pst = connection.prepareStatement("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodCount`, `prodPrice`, `prodRestockDateTime`) VALUES (?, ?, ?, ?, ?, ?);");
+            pst.setString(1, prodName);
+            pst.setString(2, prodType);
+            pst.setString(3, prodDesc);
+            pst.setInt(4, prodCount);
+            pst.setFloat(5, prodPrice);
            
+            
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
+            
+            pst.setString(6, currentTime);
+            
+            pst.executeUpdate();
+            
+        } catch (Exception ex) {            
+            ex.printStackTrace();
+            
         }
         
-        request.getRequestDispatcher("Manager.jsp");
+        request.getRequestDispatcher("ProductManager.jsp").forward(request, response);
         
     }
 

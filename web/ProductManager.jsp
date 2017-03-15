@@ -21,29 +21,29 @@
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
         <link href="css/creative.min.css" rel="stylesheet">
         <link href="css/cart.css" rel="stylesheet">
-       
+
 
     </head>
-    
+
     <style>  
-        
+
         .input-group{
             width:100%;
         }
-        
+
         #SubmitButton{
             margin-right: auto;
             margin-left: auto;
             width: 50%;
         }
-              
+
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
             background-image: url("img/pic1.jpeg");
             background-size:100%;
             background-repeat: no-repeat;
             height:auto;
-            
+
         }
 
         .navbar-default{
@@ -51,31 +51,31 @@
         }
 
         .btn.btn-danger.btn-block{
-          background-color: #F05F40;
+            background-color: #F05F40;
         }
-            
+
         .container{
             margin-top: 100px;
             width:1000px;
         }
-        
+
         legend{
             color: #F05F40;
             border-bottom-color: #F05F40;
         }
-        
-        
+
+
         .panel.panel-default{
             padding-left: 20px;
             padding-right: 20px;
             padding-bottom: 10px;
             padding-top: 10px;
         }
-        
+
         .alert{
             display: none;
         }
-        
+
         .btn.btn-default.dropdown-toggle{
             border-radius: 4px;
             border-style: solid;
@@ -85,20 +85,41 @@
             text-transform: none;
             background-color:white;
             margin-bottom: 0px;
-            
+
         }
         .dropdown-menu{
             margin-left: 15px;
             text-align: center;
             width:209.60px;
         }
-        
-        
-  
+
+
+
     </style>
 
     <body>
-
+               <%
+//allow access only if session exists
+            String user = null;
+            if (session.getAttribute("name") == null) {
+                response.sendRedirect("Login.jsp");
+            } else {
+                user = (String) session.getAttribute("name");
+            }
+            String userName = null;
+            String sessionID = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("Username")) {
+                        userName = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("JSESSIONID")) {
+                        sessionID = cookie.getValue();
+                    }
+                }
+            }
+        %>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -113,77 +134,79 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Manager!</a>
+                            <a>Hello, <%=userName%>!</a>
                         </li>
-                        
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                
-                                
+
+
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="Login.jsp">Logout</a></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container align-center">
-            
+
             <div class="panel panel-default"> 
-                <form data-toggle="validator" role="form">
-                <legend>Add New Product:</legend>
+                <form data-toggle="validator" role="form" method="POST" action="ProductServlet">
+                    <legend>Add New Product:</legend>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdName" type="text" placeholder="Product Name" required/>
+                                    <input class="form-control" id="ProdName" type="text" placeholder="Product Name" name="ProdName" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdCount" type="text" placeholder="Product Count" required/>
+                                    <input class="form-control" id="ProdCount" type="text" placeholder="Product Count" name="ProdCount" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product Type<span class="caret"></span></button>
+                            <button href="#" class="btn btn-default dropdown-toggle align-right" name="ProdType" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product Type<span class="caret"></span></button>
                             <ul class="dropdown-menu"> 
-                                <li><a href="#">Book</a></li>
-                                <li><a href="#">CD</a></li>
-                                <li><a href="#">DVD</a></li>
+                                <li><a href="#" value="Book">Book</a></li>
+                                <li><a href="#" value="CD">CD</a></li>
+                                <li><a href="#" value="DVD">DVD</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdPrice" type="text" placeholder="Product Price" required/>
+                                    <input class="form-control" id="ProdPrice" type="text" placeholder="Product Price" name="ProdPrice" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdDesc" type="text" placeholder="Product Description" required/>
+                                    <input class="form-control" id="ProdDesc" type="text" placeholder="Product Description" name="ProdDesc" required/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button><br>
+
                 </form>
             </div>
-                
-        </div>
-        
-        
 
-        
-        
-        
+        </div>
+
+
+
+
+
+
 
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

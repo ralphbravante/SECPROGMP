@@ -1,6 +1,5 @@
 package Servlets;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -11,9 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,7 +40,7 @@ public class EditProfileServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditProfileServlet</title>");            
+            out.println("<title>Servlet EditProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet EditProfileServlet at " + request.getContextPath() + "</h1>");
@@ -75,7 +76,7 @@ public class EditProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        
+
         String lastname = request.getParameter("editLastname");
         String firstname = request.getParameter("editFirstname");
         String MI = request.getParameter("editMI");
@@ -84,19 +85,23 @@ public class EditProfileServlet extends HttpServlet {
         String mobileNum = request.getParameter("editMobileNumber");
         String deliveryAdd = request.getParameter("editDeliveryAdd");
         String billingAdd = request.getParameter("editBillingAdd");
-        //int status =  Integer.parseInt(request.getParameter("editStatus"));
+        int status =  Integer.parseInt(request.getParameter("editStatus"));
+        String presentUsername = request.getParameter("presentUsername");
         
         PreparedStatement pst = null;
-        
+        String userName = null;
+        System.out.println("THis is the status of the user  " + status);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-            
-            pst = connection.prepareStatement("UPDATE `secprog`.`user` SET userLast=? , userFirst=?, userMI=?, userUsername=?, userEmail=?, userBillingAdd=?, userDeliveryAdd=?, userContactNum=?, userStatus=?, userEditDateTime=? WHERE userLast=? AND userFirst=? AND userMI=?");
+
+            pst = connection.prepareStatement("UPDATE `secprog`.`user` SET userLast=? , userFirst=?, userMI=?, userUsername=?, userEmail=?, userBillingAdd=?, userDeliveryAdd=?, userContactNum=?, userStatus=?, userEditDateTime=? WHERE userUsername = ?;");
             java.util.Date dt = new java.util.Date();
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(dt);
-            
+
+            System.out.println("THIS IS THE ATTRBUTE OF SESSION!!!! " + presentUsername);
+
             pst.setString(1, lastname);
             pst.setString(2, firstname);
             pst.setString(3, MI);
@@ -105,24 +110,19 @@ public class EditProfileServlet extends HttpServlet {
             pst.setString(6, billingAdd);
             pst.setString(7, deliveryAdd);
             pst.setString(8, mobileNum);
-            pst.setInt(9, 0);
+            pst.setInt(9, status);
             pst.setString(10, currentTime);
-            pst.setString(11, lastname);
-            pst.setString(12, firstname);
-            pst.setString(13, MI);
+            pst.setString(11,  presentUsername);
             pst.executeUpdate();
-             
-             
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.getRequestDispatcher("Admin.jsp").forward(request, response);
-           
 
-            
+        request.getRequestDispatcher("Admin.jsp").forward(request, response);
+
     }
 
     /**

@@ -103,6 +103,28 @@
     </style>
 
     <body>
+        <%
+//allow access only if session exists
+            String user = null;
+            if (session.getAttribute("name") == null) {
+                response.sendRedirect("Login.jsp");
+            } else {
+                user = (String) session.getAttribute("name");
+            }
+            String userName = null;
+            String sessionID = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("Username")) {
+                        userName = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("JSESSIONID")) {
+                        sessionID = cookie.getValue();
+                    }
+                }
+            }
+        %>
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -118,13 +140,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Admin!</a>
+                            <a>Hello, <%=userName%>!</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
                                 <li><a href="Settings.jsp">Account Settings</a></li>
-                                <li><a href="Login.jsp">Logout</a></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
                             </ul>
                         </li>
 
@@ -190,6 +212,7 @@
                                                     <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                     </div>
                                                     <input class="form-control" id="SearchUsername" name="editLastname" value="${aResult.getLastName()}" type="text">
+                                                    <input type="hidden" name="presentUsername" value="${aResult.getUsername()}">
                                                 </div>
                                             </div>
                                         </div>
@@ -265,15 +288,12 @@
                                         </div>
                                         <div class="col-md-3">
                                             Status:
-
                                             <div class="btn-group">
-                                                <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Account Status<span class="caret"></span></button>
-                                                <ul id="Status" class="dropdown-menu" name="editStatus">
-
-                                                    <li><a href="#">Locked</a></li>
-                                                    <li><a href="#">Unlocked</a></li>
-
-                                                </ul>
+                                                <select name="editStatus">
+                                                    <option value="" disabled selected>Choose Status</option>
+                                                    <option value="1">Locked</option>
+                                                    <option value="0">Unlocked</option>
+                                                </select>
                                             </div>
 
                                         </div>
@@ -471,12 +491,12 @@
 
             if ("#Search").click(function() {
 
-                var Status = ${aResult.getStatus()};
-                if (Status === 0) {
-                    $(this).parents('.btn-group').find('.dropdown-toggle').html("Unlocked" + ' <span class="caret"></span>');
-                } else {
-                    $(this).parents('.btn-group').find('.dropdown-toggle').html("Locked" + ' <span class="caret"></span>');
-                }
+            var Status = ${aResult.getStatus()};
+            if (Status === 0) {
+            $(this).parents('.btn-group').find('.dropdown-toggle').html("Unlocked" + ' <span class="caret"></span>');
+            } else {
+            $(this).parents('.btn-group').find('.dropdown-toggle').html("Locked" + ' <span class="caret"></span>');
+            }
             )};
         </script>
 
