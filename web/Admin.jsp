@@ -430,14 +430,12 @@
 
                                         <div class="col-md-3">
                                             <div class="btn-group">
-                                                <button href="#" class="btn btn-default dropdown-toggle align-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Product  Manager<span class="caret"></span></button>
-                                                <input type="hidden" id="dropdownselected" name = "ProdManager" value="">
-                                                <ul class="dropdown-menu"> 
-
+                                                <select name="ProdManager">
+                                                    <option value="" disabled selected>Choose Manager</option>
                                                     <%  while (resultset.next()) {%>
-                                                    <li><a href="#"><%= resultset.getString(1)%></a></li>
+                                                    <option value ="<%= resultset.getString(1)%>"><%= resultset.getString(1)%></option>
                                                         <% }%>
-                                                </ul>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-10">
