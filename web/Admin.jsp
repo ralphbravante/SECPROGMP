@@ -12,7 +12,7 @@
         <meta name="description" content=""> 
         <meta name="author" content="">
 
-        <title>Welcome to CSBookStore</title>
+        <title>Welcome to Foobar Bookstore</title>
 
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -133,7 +133,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">CSBookstore</a>
+                    <a class="navbar-brand page-scroll" href="#page-top">Foobar Bookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
