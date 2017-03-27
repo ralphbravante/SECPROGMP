@@ -80,6 +80,7 @@ public class AddProductServlet extends HttpServlet {
         int prodCount = Integer.parseInt(request.getParameter("ProdCount"));
         float prodPrice = Float.parseFloat(request.getParameter("ProdPrice"));
         String prodType = request.getParameter("prodType");
+        String prodAuthor = request.getParameter("prodAuthor");
         int userID=-1;
         
         DBAccess DB = new DBAccess();
@@ -93,19 +94,20 @@ public class AddProductServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
             
             
-            pst = connection.prepareStatement("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodCount`, `prodPrice`, `prodRestockDateTime`) VALUES (?, ?, ?, ?, ?, ?);");
+            pst = connection.prepareStatement("INSERT INTO `secprog`.`product` (`prodName`, `prodType`, `prodDesc`, `prodAuthor`, `prodCount`, `prodPrice`, `prodRestockDateTime`) VALUES (?, ?, ?, ?, ?, ?, ?);");
             pst.setString(1, prodName);
             pst.setString(2, prodType);
             pst.setString(3, prodDesc);
-            pst.setInt(4, prodCount);
-            pst.setFloat(5, prodPrice);
+            pst.setString(4, prodAuthor);
+            pst.setInt(5, prodCount);
+            pst.setFloat(6, prodPrice);
            
             
             java.util.Date dt = new java.util.Date();
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(dt);
             
-            pst.setString(6, currentTime);
+            pst.setString(7, currentTime);
             
             pst.executeUpdate();
             

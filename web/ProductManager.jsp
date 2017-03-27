@@ -17,7 +17,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Welcome to CSBookStore</title>
+        <title>Welcome to Foobar Bookstore</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -135,7 +135,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">CSBookstore</a>
+                    <a class="navbar-brand page-scroll" href="#page-top">Foobar Bookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -169,14 +169,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdName" type="text" placeholder="Product Name" name="ProdName" required/>
+                                    <input class="form-control" id="ProdName" maxlength="45" type="text" placeholder="Product Name" name="ProdName" required/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdCount" type="text" placeholder="Product Count" name="ProdCount" required/>
+                                    <input class="form-control" id="ProdCount" type="number" placeholder="Product Count" name="ProdCount" required/>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +188,7 @@
                                                     "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
                                             
                                             PreparedStatement pst = null;
-                                            System.out.println("This is the username in product manager" + userName);
+                                            System.out.println("This is the username in product manager " + userName);
                                             pst= connection.prepareStatement("select prodType from producttype where userID=(select userID from user where user.userUsername=? );");
                                             pst.setString(1, userName);
                                             resultset = pst.executeQuery();
@@ -200,15 +200,24 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdPrice" type="text" placeholder="Product Price" name="ProdPrice" required/>
+                                    <input class="form-control" id="prodAuthor" type="text" placeholder="Author" name="ProdAuthor" required/>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-10">
+                        
+                        
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" id="ProdDesc" type="text" placeholder="Product Description" name="ProdDesc" required/>
+                                    <input class="form-control" id="prodPrice" type="text" placeholder="Product Price"  name="ProdPrice" required/>
                                 </div>
+                            </div>
+                        </div>  
+                        
+                        
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <textarea type="text" rows="5" maxlength="1000" class="form-control" id="prodDesc" name="ProdDesc" placeholder="Product Description" required ></textarea>
                             </div>
                         </div>
                     </div>

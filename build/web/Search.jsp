@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Welcome to CSBookStore</title>
+        <title>Welcome to Foobar Bookstore</title>
 
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -105,7 +105,28 @@
     </style>
 
     <body>
-
+         <%
+//allow access only if session exists
+            String user = null;
+            if (session.getAttribute("name") == null) {
+                response.sendRedirect("Login.jsp");
+            } else {
+                user = (String) session.getAttribute("name");
+            }
+            String userName = null;
+            String sessionID = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("Username")) {
+                        userName = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("JSESSIONID")) {
+                        sessionID = cookie.getValue();
+                    }
+                }
+            }
+        %>
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -114,14 +135,14 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">CSBookstore</a>
+                    <a class="navbar-brand page-scroll" href="#page-top">Foobar Bookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Customer!</a>
+                            <a>Hello, <%=userName %>!</a>
                         </li>
                         <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart(0)</a></li>
                         <li class="dropdown">
@@ -129,10 +150,10 @@
                             <ul class="dropdown-menu" style="text-align:right;">
                                 
                                 
-                                <li><a href="Settings.html">Account Info</a></li>
+                                <li><a href="Settings.jsp">Account Info</a></li>
                                 <li><a href="#">Payment Info</a></li>
                                 <li><a href="#">Purchase History</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
                             </ul>
                         </li>
                         
