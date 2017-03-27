@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static org.apache.taglibs.standard.tag.common.core.OutSupport.out;
 
 /**
  *
@@ -80,6 +79,9 @@ public class recoverServlet extends HttpServlet {
         //processRequest(request, response);
 
         try {
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            
             String rEmailAdd = request.getParameter("recoverEmail");
             String rUsername = request.getParameter("recoverUsername");
             String newPass = request.getParameter("newPassword");
@@ -87,8 +89,7 @@ public class recoverServlet extends HttpServlet {
             PreparedStatement pst = null;
             ResultSet rs = null;
             int userID = 0;
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
+            
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
@@ -100,6 +101,7 @@ public class recoverServlet extends HttpServlet {
 
             if (rs.next()) {
                 userID = (int) rs.getInt(1);
+                System.out.println("THIS IS THE EFFIN USERID OKAY????? " + userID);
                 MessageDigest md = MessageDigest.getInstance("SHA-1");
                 byte[] bytes = md.digest(newPass.getBytes());
                 StringBuilder sb = new StringBuilder();
@@ -117,14 +119,16 @@ public class recoverServlet extends HttpServlet {
                 pst.setInt(3, rs.getInt(1));
                 pst.executeUpdate();
                 
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Your password was changed successfully!');");
+                out.println("location='Login.jsp';");
+                out.println("</script>");
 
             } else {
                 out.println("<script type=\"text/javascript\">");
-                out.println("alert('Your account is locked, change password via email.');");
+                out.println("alert('Your password was not changed!');");
                 out.println("location='Login.jsp';");
                 out.println("</script>");
-                request.getRequestDispatcher("Admin.jsp").forward(request, response);
             }
 
         } catch (ClassNotFoundException ex) {

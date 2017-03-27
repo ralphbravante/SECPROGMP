@@ -5,11 +5,15 @@
         <group>
             <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Servlets/Login.java</file>
             <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Customer.jsp</file>
+            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Servlets/Register.java</file>
             <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Search.jsp</file>
+            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/FinancialManager.jsp</file>
+            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Servlets/EditProfileServlet.java</file>
+            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Recover.jsp</file>
             <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Login.jsp</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Servlets/Search.java</file>
-            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Servlets/AddGenre.java</file>
             <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Admin.jsp</file>
+            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/web/Register.jsp</file>
+            <file>file:/C:/Users/ralph/Documents/GitHub/SECPROGMP/src/java/Servlets/recoverServlet.java</file>
         </group>
     </open-files>
 </project-private>

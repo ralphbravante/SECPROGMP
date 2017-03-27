@@ -122,7 +122,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                         </div>
-                                        <input class="form-control" id="Username" name="Username" type="text" placeholder="Username" required>
+                                        <input class="form-control" id="Username" name="recoverUsername" type="text" placeholder="Username" required>
                                     </div>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -137,7 +137,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                         </div>
-                                        <input class="form-control" id="Email" name="Email" type="email" placeholder="Email Address" data-error="Please input a valid email." required>                                                       
+                                        <input class="form-control" id="Email" name="recoverEmail" type="email" placeholder="Email Address" data-error="Please input a valid email." required>                                                       
                                     </div>
                                     <div class="help-block with-errors"></div>
                                 </div>
