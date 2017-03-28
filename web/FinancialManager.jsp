@@ -34,26 +34,37 @@
         <![endif]-->
 
     </head>
-    
+
     <style>  
-        
+
         .input-group{
             width:100%;
         }
-        
+
         #SubmitButton{
             margin-right: auto;
             margin-left: auto;
             width: 50%;
         }
-              
+
+
+        #logout{
+            background-color:transparent;
+            border:none;
+            padding-left: 120px;
+            padding-right: 20px;
+            width:auto;
+            height:26px;
+        }
+
+
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
             background-image: url("img/pic1.jpeg");
             background-size:100%;
             background-repeat: no-repeat;
             height:auto;
-            
+
         }
 
         .navbar-default{
@@ -61,31 +72,31 @@
         }
 
         .btn.btn-danger.btn-block{
-          background-color: #F05F40;
+            background-color: #F05F40;
         }
-            
+
         .container{
             margin-top: 100px;
             width:1300px;
         }
-        
+
         legend{
             color: #F05F40;
             border-bottom-color: #F05F40;
         }
-        
-        
+
+
         .panel.panel-default{
             padding-left: 20px;
             padding-right: 20px;
             padding-bottom: 10px;
             padding-top: 10px;
         }
-        
+
         .alert{
             display: none;
         }
-        
+
         .btn.btn-default.dropdown-toggle{
             border-radius: 4px;
             border-style: solid;
@@ -95,7 +106,7 @@
             text-transform: none;
             background-color:white;
             margin-bottom: 10px;
-            
+
         }
         .dropdown-menu{
             margin-left: 15px;
@@ -103,16 +114,16 @@
             width:186.663px;
             margin-top: -10px;
         }
-        
-  
+
+
     </style>
 
     <body>
-               <%
+        <%
 //allow access only if session exists
             String user = null;
-            if (session.getAttribute("name") == null) {
-                response.sendRedirect("Login.jsp");
+            if (session.getAttribute("name") == null || session.getAttribute("userType") != "3") {
+                request.getRequestDispatcher("Login.jsp");
             } else {
                 user = (String) session.getAttribute("name");
             }
@@ -146,17 +157,17 @@
                         <li>
                             <a>Hello, <%=userName%>!</a>
                         </li>
-                        
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                
-                                
+
+
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
+                                <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -177,7 +188,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -190,25 +201,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td data-th="Product ID">0112</td>
-                                <td data-th="Purchase ID">24232</td>
-                                <td data-th="User ID">021312</td>
-                                <td data-th="Product Name">Harry Potter</td>
-                                <td data-th="Product Type">Book</td>
-                                <td data-th="Product ID">September 16, 2017</td>
-                                
+                            <td data-th="Product ID">0112</td>
+                            <td data-th="Purchase ID">24232</td>
+                            <td data-th="User ID">021312</td>
+                            <td data-th="Product Name">Harry Potter</td>
+                            <td data-th="Product Type">Book</td>
+                            <td data-th="Product ID">September 16, 2017</td>
+
                             </tbody>
                         </table> 
                     </div>
                 </div>
             </div>
         </div>
-        
-        
 
-        
-        
-        
+
+
+
+
+
 
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -44,6 +44,17 @@
             margin-left: auto;
             width: 50%;
         }
+        
+        
+        #logout{
+            background-color:transparent;
+            border:none;
+            padding-left: 120px;
+            padding-right: 20px;
+            width:auto;
+            height:26px;
+        }
+        
 
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
@@ -109,8 +120,9 @@
                <%
 //allow access only if session exists
             String user = null;
-            if (session.getAttribute("name") == null) {
-                response.sendRedirect("Login.jsp");
+            if (session.getAttribute("name") == null || session.getAttribute("userType") != "4") {
+                
+                request.getRequestDispatcher("Login.jsp");
             } else {
                 user = (String) session.getAttribute("name");
             }
@@ -151,7 +163,7 @@
 
 
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
+                                <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
 
@@ -194,7 +206,7 @@
                                             resultset = pst.executeQuery();
                                         %>
                             <%  while (resultset.next()) {%>
-                            <input type="hidden" name="prodType" value="<%= resultset.getString(1)%>">
+                            <input type="hidden" name="ProdType" value="<%= resultset.getString(1)%>">
                             <% }%>
                         </div>
                         <div class="col-md-6">

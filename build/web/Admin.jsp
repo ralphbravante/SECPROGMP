@@ -23,7 +23,7 @@
 
     </head>
 
-    <style>
+   <style>
 
 
 
@@ -99,15 +99,24 @@
             margin-bottom: 0px;
 
         }
+        #logout{
+            background-color:transparent;
+            border:none;
+            padding-left: 120px;
+            padding-right: 20px;
+            width:auto;
+            height:26px;
+        }
 
     </style>
+
 
     <body>
         <%
 //allow access only if session exists
             String user = null;
-            if (session.getAttribute("name") == null) {
-                response.sendRedirect("Login.jsp");
+            if(session.getAttribute("name") == null || session.getAttribute("userType") != "2") {
+                request.getRequestDispatcher("Login.jsp");
             } else {
                 user = (String) session.getAttribute("name");
             }
@@ -146,7 +155,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
                                 <li><a href="Settings.jsp">Account Settings</a></li>
-                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout" id="logout">Logout</button></form></li>
                                 
                             </ul>
                         </li>

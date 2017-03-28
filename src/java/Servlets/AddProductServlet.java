@@ -79,8 +79,8 @@ public class AddProductServlet extends HttpServlet {
         String prodDesc = request.getParameter("ProdDesc");
         int prodCount = Integer.parseInt(request.getParameter("ProdCount"));
         float prodPrice = Float.parseFloat(request.getParameter("ProdPrice"));
-        String prodType = request.getParameter("prodType");
-        String prodAuthor = request.getParameter("prodAuthor");
+        String prodType = request.getParameter("ProdType");
+        String prodAuthor = request.getParameter("ProdAuthor");
         int userID=-1;
         
         DBAccess DB = new DBAccess();

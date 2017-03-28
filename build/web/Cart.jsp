@@ -83,7 +83,14 @@
         }
         
         
-  
+        #logout{
+            background-color:transparent;
+            border:none;
+            padding-left: 120px;
+            padding-right: 20px;
+            width:auto;
+            height:26px;
+        }
     </style>
 
     <body>
@@ -133,8 +140,8 @@
                             <ul class="dropdown-menu" style="text-align:right;">
                                 
                                 
-                                <li><a href="#">AccounSettings</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="Settings.jsp">AccounSettings</a></li>
+                                <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
                         

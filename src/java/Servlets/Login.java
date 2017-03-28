@@ -1,6 +1,8 @@
 package Servlets;
 
+import Beans.Product;
 import DB.DBAccess;
+import Services.ProductServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -10,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -76,11 +79,15 @@ public class Login extends HttpServlet {
             pst2 = connection.prepareStatement("select userUsername, userID, userTypeID, userStatus, userPassword from user where userPassword = ?;");
             pst2.setString(1, generatedPassword);
             rs2 = pst2.executeQuery();
+            
             System.out.println("PASOK NAMAN22");
 
             if (rs.next() && rs2.next()) {
+                int userTypeIDD = rs.getInt(3);
+                System.out.println("THIS IS THE USER TYPE ID BOOOOOOOOOIIIIIIIIII " + userTypeIDD);
                 HttpSession session = request.getSession();
                 session.setAttribute("name", Username);
+                session.setAttribute("userType", userTypeIDD);
                 System.out.println("SESSION NAME1: " + (String) session.getAttribute("name"));
                 //setting session to expiry in 30 mins
                 session.setMaxInactiveInterval(60 * 60);
@@ -117,7 +124,9 @@ public class Login extends HttpServlet {
                     RequestDispatcher rd;
                     System.out.print("PASOK1");
                     if (userTypeID == 1) {
+                        ArrayList<Product> prod = new ArrayList<>();
                         System.out.print("PASOK2");
+                        prod = ProductServices.retrieveFeaturedProducts();
                         response.sendRedirect("Customer.jsp");
                     } else if (userTypeID == 2) {
                         response.sendRedirect("Admin.jsp");
@@ -136,67 +145,33 @@ public class Login extends HttpServlet {
                     pst.executeUpdate();
 
                     out.println("<script type=\"text/javascript\">");
-                            out.println("alert('Your account is locked, change password via email.');");
-                            out.println("location='Login.jsp';");
-                            out.println("</script>");
+                    out.println("alert('Your account is locked, change password via email.');");
+                    out.println("location='Login.jsp';");
+                    out.println("</script>");
 
                 }
             } else if (!(rs2.next()) && rs.isFirst()) {
                 System.out.println("PASOK NAMAN KASI TALGA");
-                
-                    System.out.println("PASOK NAMAN");
 
-                    int userID = rs.getInt(2);
-                    System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
-                    pst = connection.prepareStatement("select userAttemptCount, loginTimeStamp from userlogins where userid=? AND Status like '%Failed%' order by loginTimeStamp desc;");
-                    pst.setInt(1, userID);
-                    rs3 = pst.executeQuery();
-                    int latestAttemptCount = 0;
-                    if (rs3.next()) {
-                        latestAttemptCount = rs3.getInt(1);
+                System.out.println("PASOK NAMAN");
 
-                        if (latestAttemptCount < 5) {
-                            latestAttemptCount = latestAttemptCount + 1;
+                int userID = rs.getInt(2);
+                System.out.println(userID + "USERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERIDUSERID");
+                pst = connection.prepareStatement("select userAttemptCount, loginTimeStamp from userlogins where userid=? AND Status like '%Failed%' order by loginTimeStamp desc;");
+                pst.setInt(1, userID);
+                rs3 = pst.executeQuery();
+                int latestAttemptCount = 0;
+                if (rs3.next()) {
+                    latestAttemptCount = rs3.getInt(1);
 
-                            pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
-                            pst.setInt(1, userID);
-                            pst.setString(2, "Failed");
-                            pst.setString(3, currentTime);
-                            pst.setInt(4, latestAttemptCount);
-                            pst.executeUpdate();
+                    if (latestAttemptCount < 5) {
+                        latestAttemptCount = latestAttemptCount + 1;
 
-                            out.println("<script type=\"text/javascript\">");
-                            out.println("alert('Username or password incorrect');");
-                            out.println("location='Login.jsp';");
-                            out.println("</script>");
-
-                        } else if (latestAttemptCount >= 5) {
-                            //Insert Captcha here
-                            pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
-                            pst.setInt(1, userID);
-                            pst.setString(2, "Failed/Locked");
-                            pst.setString(3, currentTime);
-                            pst.setInt(4, latestAttemptCount);
-                            pst.executeUpdate();
-                            
-                            pst2 = connection.prepareStatement("update  user SET `userStatus` = ? WHERE userID = ?; ");
-                            pst2.setInt(1, 1);
-                            pst2.setInt(2, userID);
-                            pst2.executeUpdate();
-                           
-
-                            out.println("<script type=\"text/javascript\">");
-                            out.println("alert('Your account is locked, change password via email.');");
-                            out.println("location='Login.jsp';");
-                            out.println("</script>");
-
-                        }
-                    } else if (!(rs3.next())) {
                         pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
                         pst.setInt(1, userID);
                         pst.setString(2, "Failed");
                         pst.setString(3, currentTime);
-                        pst.setInt(4, 1);
+                        pst.setInt(4, latestAttemptCount);
                         pst.executeUpdate();
 
                         out.println("<script type=\"text/javascript\">");
@@ -204,8 +179,41 @@ public class Login extends HttpServlet {
                         out.println("location='Login.jsp';");
                         out.println("</script>");
 
+                    } else if (latestAttemptCount >= 5) {
+                        //Insert Captcha here
+                        pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                        pst.setInt(1, userID);
+                        pst.setString(2, "Failed/Locked");
+                        pst.setString(3, currentTime);
+                        pst.setInt(4, latestAttemptCount);
+                        pst.executeUpdate();
+
+                        pst2 = connection.prepareStatement("update  user SET `userStatus` = ? WHERE userID = ?; ");
+                        pst2.setInt(1, 1);
+                        pst2.setInt(2, userID);
+                        pst2.executeUpdate();
+
+                        out.println("<script type=\"text/javascript\">");
+                        out.println("alert('Your account is locked, change password via email.');");
+                        out.println("location='Login.jsp';");
+                        out.println("</script>");
+
                     }
-                
+                } else if (!(rs3.next())) {
+                    pst = connection.prepareStatement("insert into userlogins (userID, Status, loginTimeStamp, userAttemptCount)values (?,?,?,?)");
+                    pst.setInt(1, userID);
+                    pst.setString(2, "Failed");
+                    pst.setString(3, currentTime);
+                    pst.setInt(4, 1);
+                    pst.executeUpdate();
+
+                    out.println("<script type=\"text/javascript\">");
+                    out.println("alert('Username or password incorrect');");
+                    out.println("location='Login.jsp';");
+                    out.println("</script>");
+
+                }
+
             } else {
                 System.out.println("asldkjashfqwerqiewjgaklsdg;jhasepofaisdjfhliue;krqjwemofiahsfgap'sodfuasdfkj");
                 //ACCOUNT DOES NOT EXIST

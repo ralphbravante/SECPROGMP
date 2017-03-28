@@ -1,3 +1,6 @@
+<%@page import="Services.ProductServices"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Beans.Product"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +41,17 @@
 
 
         }
+
+
+        #logout{
+            background-color:transparent;
+            border:none;
+            padding-left: 120px;
+            padding-right: 20px;
+            width:auto;
+            height:26px;
+        }
+
 
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
@@ -92,9 +106,10 @@
         <%
 //allow access only if session exists
             String user = null;
-            if (session.getAttribute("name") == null) {
-                response.sendRedirect("Login.jsp");
+            if (session.getAttribute("name") == null || session.getAttribute("userType") != "1") {
+                request.getRequestDispatcher("Login.jsp");
             } else {
+                System.out.println("MOVE BIIIIATCCHHHHHHH2222222");
                 user = (String) session.getAttribute("name");
             }
             String userName = null;
@@ -110,6 +125,9 @@
                     }
                 }
             }
+
+            ArrayList<Product> prodFeatured = ProductServices.retrieveFeaturedProducts();
+
         %>
 
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -126,7 +144,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, <%=userName %>!</a>
+                            <a>Hello, <%=userName%>!</a>
                         </li>
                         <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart(0)</a></li>
                         <li class="dropdown">
@@ -137,7 +155,7 @@
                                 <li><a href="Settings.jsp">Account Info</a></li>
                                 <li><a href="#">Payment Info</a></li>
                                 <li><a href="#">Purchase History</a></li>
-                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout"></button></form></li>
+                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
 
@@ -170,12 +188,14 @@
                 </div>
 
                 <div class="row text-center">
+                    <% for (int i = 0; i < prodFeatured.size(); i++) { %>
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <img src="http://placehold.it/800x500" alt="">
                             <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
+                                <h3><% out.println(prodFeatured.get(i).getProdName()); %></h3>
+                                <h6>by <% out.println(prodFeatured.get(i).getProdAuthor()); %></h6>
+                                <p><% out.println(prodFeatured.get(i).getProdDesc()); %></p>
                                 <p>
                                     <button type="button" class="btn btn-primary">Add to Cart</button>
 
@@ -184,48 +204,12 @@
                             </div>  
                         </div>
                     </div>
+                    <%}%>
 
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/800x500" alt="">
-                            <div class="caption">
-                                <h3>Feautured Item 1</h3>
-                                <p>Description Here...</p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    <button type="button" class="btn btn-warning">More Info</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div> 
+
+
                 </div>
             </div>
         </div>

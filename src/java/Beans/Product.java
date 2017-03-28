@@ -11,19 +11,18 @@ public class Product {
     private String prodName;
     private String prodType;
     private String prodDesc;
+    private String prodAuthor;
     private int prodCount;
     private double prodPrice;
-    private String prodBy;
     private String prodRestockDateTime;
 
     
-    
-    public void setProdBy(String prodBy) {
-        this.prodBy = prodBy;
+    public void setProdAuthor(String prodAuthor) {
+        this.prodAuthor = prodAuthor;
     }
 
-    public String getProdBy() {
-        return prodBy;
+    public String getProdAuthor() {
+        return prodAuthor;
     }
     
     public void setProdID(int prodID) {

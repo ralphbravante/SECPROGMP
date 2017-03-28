@@ -45,6 +45,17 @@
             margin-left: auto;
             width: 50%;
         }
+        
+        
+        #logout{
+            background-color:transparent;
+            border:none;
+            padding-left: 120px;
+            padding-right: 20px;
+            width:auto;
+            height:26px;
+        }
+        
 
         body {
             font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
@@ -137,7 +148,7 @@
                                 <li><a href="Settings.jsp">Account Info</a></li>
                                 <li><a href="#">Payment Info</a></li>
                                 <li><a href="#">Purchase History</a></li>
-                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout">Logout</button></form></li>
+                                <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
 
