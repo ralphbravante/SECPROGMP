@@ -20,86 +20,10 @@
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
         <link href="css/creative.min.css" rel="stylesheet">
+        <link href="css/secprog.css" rel="stylesheet">
 
 
     </head>
-
-    <style>  
-
-        .input-group{
-            width:100%;
-        }
-
-        #SubmitButton{
-            margin-right: auto;
-            margin-left: auto;
-            width: 50%;
-        }
-
-        .btn.btn-danger.btn-block{
-            background-color: #F05F40;
-
-
-        }
-
-
-        #logout{
-            background-color:transparent;
-            border:none;
-            padding-left: 120px;
-            padding-right: 20px;
-            width:auto;
-            height:26px;
-        }
-
-
-        body {
-            font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-            background-image: url("img/pic1.jpeg");
-            background-size:100%;
-            background-repeat: no-repeat;
-            height:auto;
-
-        }
-
-        #NavPanel{
-            width:300px; 
-        }
-
-        .navbar-default{
-            background-color:#333;
-        }
-
-        #MainContainer{
-            margin-top: 150px;
-            margin-left: 20px;
-        }
-        .tab-content{
-            padding:20px;
-        }
-
-        .jumbotron{
-            margin-top: 100px;
-            padding-top:20px;
-        }
-
-        .btn{
-            border-radius: 4px;
-            font-weight: normal;
-        }
-
-
-        .panel.panel-default{
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .alert{
-            display: none;
-        }
-
-
-    </style>
 
     <body>
 
@@ -139,7 +63,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">Foobar Bookstore</a>
+                    <a class="navbar-brand page-scroll" href="Customer.jsp">Foobar Bookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -155,8 +79,8 @@
 
 
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="#">Payment Info</a></li>
-                                <li><a href="#">Purchase History</a></li>
+                                <li><a href="PaymentInfo.jsp">Purchase History</a></li>
+                                <li><a href="purchasehistory.jsp">Purchase History</a></li>
                                 <li><form action="Logout" method="POST"><button type="submit" value = "Logout" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
