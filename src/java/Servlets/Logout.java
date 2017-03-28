@@ -70,7 +70,7 @@ public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        
+        /*
         Cookie[] cookies = request.getCookies();
     	if(cookies != null){
     	for(Cookie cookie : cookies){
@@ -87,13 +87,25 @@ public class Logout extends HttpServlet {
     		session.invalidate();
     	}
     	response.sendRedirect("Login.jsp");
-    }
+    }*/
+        
+        Cookie[] cookies = request.getCookies();
+for (Cookie cookie : cookies) {
+cookie.setMaxAge(0);
+cookie.setValue(null);
+cookie.setPath("/");
+response.addCookie(cookie);
+}
+        
+        request.getSession().invalidate();
+        response.sendRedirect("Login.jsp");
 
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
+    }
     @Override
     public String getServletInfo() {
         return "Short description";

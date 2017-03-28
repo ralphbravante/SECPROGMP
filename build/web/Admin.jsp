@@ -114,8 +114,16 @@
     <body>
         <%
 //allow access only if session exists
+
+            System.out.println(session.getAttribute("userType") + "   HELLOOO ADNSAKJDNLJSAJFDASJDKASBHFJASF A");
+            int trial = (Integer) session.getAttribute("userType");
+            System.out.println(trial);
+            if(trial == 1){
+                System.err.println("BAT KA GANYAN");
+            }
+            
             String user = null;
-            if(session.getAttribute("name") == null || session.getAttribute("userType") != "2") {
+            if(session.getAttribute("name") == null || trial != 2) {
                 request.getRequestDispatcher("Login.jsp");
             } else {
                 user = (String) session.getAttribute("name");
