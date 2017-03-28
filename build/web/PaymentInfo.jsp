@@ -48,7 +48,7 @@
                 }
             }
 
-            ArrayList<Product> prodFeatured = ProductServices.retrieveFeaturedProducts();
+   
 
         %>
 
@@ -75,7 +75,7 @@
 
 
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="#">Payment Info</a></li>
+                                <li><a href="PaymentInfo.jsp">Purchase History</a></li>
                                 <li><a href="purchasehistory.jsp">Purchase History</a></li>
                                 <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>

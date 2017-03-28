@@ -119,9 +119,9 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/800x500" alt="">
                             <div class="caption">
-                                <h3><% out.println(prodFeatured.get(i).getProdName()); %></h3>
-                                <h6>by <% out.println(prodFeatured.get(i).getProdAuthor()); %></h6>
-                                <p><% out.println(prodFeatured.get(i).getProdDesc()); %></p>
+                                <h4><% out.println(prodFeatured.get(i).getProdName()); %></h4>
+                                <h5>by <% out.println(prodFeatured.get(i).getProdAuthor()); %></h5>
+                                <h6><% out.println(prodFeatured.get(i).getProdDesc()); %></h6>
                                 <p>
                                     <button type="button" class="btn btn-primary">Add to Cart</button>
 
