@@ -15,93 +15,16 @@
 
         <title>Welcome to Foobar Bookstore</title>
 
-        <!-- Bootstrap Core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
-        <!-- Plugin CSS -->
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-        <!-- Theme CSS -->
         <link href="css/creative.min.css" rel="stylesheet">
+        <link href="css/secprog.css" rel="stylesheet">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
     </head>
-
-    <style>  
-
-        .input-group{
-            width:100%;
-        }
-
-        #SubmitButton{
-            margin-right: auto;
-            margin-left: auto;
-            width: 50%;
-        }
-        
-        
-        #logout{
-            background-color:transparent;
-            border:none;
-            padding-left: 120px;
-            padding-right: 20px;
-            width:auto;
-            height:26px;
-        }
-        
-
-        body {
-            font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-            background-image: url("img/pic1.jpeg");
-            background-size:100%;
-            background-repeat: no-repeat;
-            height:auto;
-
-        }
-
-        .navbar-default{
-            background-color:#333;
-        }
-
-        .btn.btn-danger.btn-block{
-            background-color: #F05F40;
-        }
-
-        .container{
-            margin-top: 100px;
-            width:900px;
-        }
-
-        legend{
-            color: #F05F40;
-            border-bottom-color: #F05F40;
-        }
-
-
-        .panel.panel-default{
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-bottom: 10px;
-            padding-top: 10px;
-        }
-
-        .alert{
-            display: none;
-        }
-
-
-    </style>
 
     <body>
                  <%
@@ -140,7 +63,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">Foobar Bookstore</a>
+                    <a class="navbar-brand page-scroll" href="Customer.jsp">Foobar Bookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -156,8 +79,8 @@
 
 
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="#">Payment Info</a></li>
-                                <li><a href="#">Purchase History</a></li>
+                                <li><a href="PaymentInfo.jsp">Purchase History</a></li>
+                                <li><a href="purchasehistory.jsp">Purchase History</a></li>
                                 <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
@@ -167,11 +90,11 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container" id="defaultcontainer">
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="defaultpanel">
 
-                <legend>Your Account Info:</legend>
+                <legend id="orangelegend">Your Account Info:</legend>
 
 
                 <div class="row">

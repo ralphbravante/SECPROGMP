@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -23,8 +22,8 @@
     </head>
 
     <body>
-        
-        <%
+
+               <%
 //allow access only if session exists
             String user = null;
             //System.out.println(session.getAttribute("name"));
@@ -67,84 +66,97 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a>Hello, Customer!</a>
+                            <a>Hello, <%=userName %>!</a>
                         </li>
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart(0)</a></li>
+                        <li><a href="Cart.jsp"><span class="glyphicon glyphicon-shopping-cart"></span>Cart(0)</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
-                                
-                                
+
+
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="PaymentInfo.jsp">Purchase History</a></li>
+                                <li><a href="#">Payment Info</a></li>
                                 <li><a href="purchasehistory.jsp">Purchase History</a></li>
                                 <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
-                
-                
-                
-                
+
+
+
+
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
+            
+            
+        <div class="container" id="paymentcontainer">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default" id="paymentpadding">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><b>Payment Method</b></h3>
+                        </div>
+                        <center>
+                            <div class="panel-body">
+                                <form data-toggle="validator" role="form">
+                                    <div class="panel panel-default" id="paymentpadding">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Credit Card</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <input type="text" id="cardinfo" class="form-control" placeholder="Card Number" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="text" id="cardinfo" class="form-control" placeholder="Name on Card" required>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="text" id="cardinfo" class="form-control" placeholder="Expiration (MM/YY)" required>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <input type="text" id="cardinfo" class="form-control" placeholder="Security Code" required>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
 
-        
-        <div class="container" id="ProductContainer" >
-            <div class="panel panel-default" id="defaultpanel">
-                <div class="row">
-                <br>
-                <legend> Product Info:</legend>
-                    
-                    <div class="col-md-5">
-                       <img src="http://placehold.it/600x600" alt="..." class="img-responsive"/>
-                    </div>
-                    <div class="col-md-6">
-                        
-                        <h1>Harry Potter</h1>
-                        <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
-                        <p><b>Price: </b>$1.99</p>
-                        <p><b>Author: </b>J.K. Rowling</p>
-                        <p><b>Rating: </b>4.3/5.0</p>
-                        <p><b>No. of Reviews: </b>12</p>
-
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <legend></legend>
-                    <legend>Reviews:</legend>
-                    <div class="col-md-2">
-                        <img src="http://placehold.it/150x150" alt="..." class="img-responsive"/>
-                    </div>
-                    <div class="col-md-8">
-                        <h3>Ralphie says...</h3>
-                        <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
-                        <p><b>Rating: </b>4/5</p>
-                    </div>
-
+                                    
+                                    
+                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                </form>
+                            </div>
+                        </center> 
+                    </div>                        
                 </div>
                 
-                <div class="row">
-                    <legend></legend>
-                    <legend>Post a Review:</legend>
-                    <div class="col-md-2">
-                        <img src="http://placehold.it/150x150" alt="..." class="img-responsive"/>
-                    </div>
-                    <div class="col-md-8">
-                        <textarea type="text" rows="4" class="form-control"  placeholder="Say something..." required></textarea>
-                    </div>
-
-                </div>
                 
             </div>
-
         </div>
+
+
         
+
 
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

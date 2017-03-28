@@ -26,106 +26,10 @@
         <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
         <link href="css/creative.min.css" rel="stylesheet">
-        <link href="css/cart.css" rel="stylesheet">
+        <link href="css/secprog.css" rel="stylesheet">
 
 
     </head>
-
-    <style>  
-
-        .input-group{
-            width:100%;
-        }
-
-        #SubmitButton{
-            margin-right: auto;
-            margin-left: auto;
-            width: 50%;
-        }
-
-        .btn.btn-danger.btn-block{
-            background-color: #F05F40;
-
-
-        }
-        .btn.btn-danger.btn-block.btn-small{
-            border-radius: 4px;
-            width: 80%!important;
-            margin-left: 0px!important;
-        }
-
-        body {
-            font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-            background-image: url("img/pic1.jpeg");
-            background-size:100%;
-            background-repeat: no-repeat;
-            height:auto;
-
-        }
-
-        #NavPanel{
-            width:300px; 
-        }
-
-        .navbar-default{
-            background-color:#333;
-        }
-
-        #MainContainer{
-            margin-top: 100px;
-            margin-left: 20px;
-        }
-
-
-        .btn.btn-default.dropdown-toggle{
-            border-radius: 0px;
-            background-color:none;
-            margin-bottom: 0px;
-            font-weight: normal;
-            width:100%;
-            text-transform: none;
-        }
-        .dropdown-menu{
-            text-align: center;
-            width:165px;
-        }
-        .btn-group{
-
-            font-weight: normal;
-            width:100%;
-            text-transform: none;
-            background-color:white;
-            margin-bottom: 0px;
-
-        }
-
-
-
-        .btn{
-            border-radius: 4px;
-            font-weight: normal;
-        }
-
-
-        #logout{
-            background-color:transparent;
-            border:none;
-            padding-left: 120px;
-            padding-right: 20px;
-            width:auto;
-            height:26px;
-        }
-
-        #products{
-            padding:30px;
-        }
-
-
-
-
-
-
-    </style>
 
     <body>
                 <%
@@ -164,7 +68,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">Foobar Bookstore</a>
+                    <a class="navbar-brand page-scroll" href="Customer.jsp">Foobar Bookstore</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -180,8 +84,8 @@
 
 
                                 <li><a href="Settings.jsp">Account Info</a></li>
-                                <li><a href="#">Payment Info</a></li>
-                                <li><a href="#">Purchase History</a></li>
+                                <li><a href="PaymentInfo.jsp">Purchase History</a></li>
+                                <li><a href="purchasehistory.jsp">Purchase History</a></li>
                                 <li><form action="Logout" method="POST"><button type="submit" id="logout">Logout</button></form></li>
                             </ul>
                         </li>
@@ -226,7 +130,7 @@
                 %>
                 <div class="col-md-1">
                     <div class="btn-group">
-                        <select name="prodType">
+                        <select class="form-control" id="prodtype" name="prodType">
                             <option value="" disabled selected>Genre</option>
                             <%  while (resultset.next()) {%>
                             <option value ="<%= resultset.getString(1)%>"><%= resultset.getString(1)%></option>
