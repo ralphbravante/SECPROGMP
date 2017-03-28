@@ -52,7 +52,7 @@
                 }
             }
 
-
+            
 
         %>
 
@@ -71,6 +71,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a>Hello, <%=userName%>!</a>
+                            
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
@@ -337,7 +338,7 @@
 
                             <div class="tab-pane text-style" id="AddGenre" >
                                 <form role="form" method="post" action="AddGenre">
-                                    <div class="row">
+                                    
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="input-group">
@@ -347,25 +348,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%
-
-                                            Class.forName("com.mysql.jdbc.Driver");
-                                            Connection connection = DriverManager.getConnection(
-                                                    "jdbc:mysql://localhost:3306/secprog", "root", "p@ssword");
-
-                                            Statement statement = connection.createStatement();
-
-                                            resultset = statement.executeQuery(" select distinct user.userUsername from user where user.userID NOT in  (select distinct productType.userID from productType) AND user.userTypeID=4;");
-
-                                        %>
-
+                                        
                                         <div class="col-md-3">
                                             <div class="btn-group">
                                                 <select name="ProdManager">
                                                     <option value="" disabled selected>Choose Manager</option>
-                                                    <%  while (resultset.next()) {%>
-                                                    <option value ="<%= resultset.getString(1)%>"><%= resultset.getString(1)%></option>
-                                                        <% }%>
+                                                    <c:forEach items="${result}" var="item">
+                                                    <option value ="${item}"> ${item} </option>
+                                                    </c:forEach>
+                                                        
                                                 </select>
                                             </div>
                                         </div>
@@ -378,7 +369,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    
                                     <button type="submit" id="SubmitButton" class="btn btn-danger btn-block">Add</button> 
                                 </form>
                             </div>

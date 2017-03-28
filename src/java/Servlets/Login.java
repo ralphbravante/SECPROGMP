@@ -129,7 +129,16 @@ public class Login extends HttpServlet {
                         prod = ProductServices.retrieveFeaturedProducts();
                         response.sendRedirect("Customer.jsp");
                     } else if (userTypeID == 2) {
-                        response.sendRedirect("Admin.jsp");
+                        pst = connection.prepareStatement(" select distinct user.userUsername from user where user.userID NOT in  (select distinct productType.userID from productType) AND user.userTypeID=4;");
+                        rs = pst.executeQuery();
+                        ArrayList Rows = new ArrayList();
+                        while (rs.next()) {
+                                Rows.add(rs.getString(1));
+                        }
+                        request.setAttribute("result", Rows);
+                        rd = request.getRequestDispatcher("/Admin.jsp");
+                        rd.forward(request, response);
+                        
                     } else if (userTypeID == 3) {
                         response.sendRedirect("FinancialManager.jsp");
                     } else if (userTypeID >= 4) {
