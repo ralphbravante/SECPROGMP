@@ -112,20 +112,15 @@
 
 
     <body>
-        <%
+                <%
 //allow access only if session exists
-
-            System.out.println(session.getAttribute("userType") + "   HELLOOO ADNSAKJDNLJSAJFDASJDKASBHFJASF A");
-            int trial = (Integer) session.getAttribute("userType");
-            System.out.println(trial);
-            if(trial == 1){
-                System.err.println("BAT KA GANYAN");
-            }
-            
             String user = null;
-            if(session.getAttribute("name") == null || trial != 2) {
-                request.getRequestDispatcher("Login.jsp");
+            //System.out.println(session.getAttribute("name"));
+            if (((String)session.getAttribute("name")) == null|| ( (Integer) session.getAttribute("userType")) != 2) {
+                System.out.println("MOVE BIIIIATCCHHHHHHH2222222 pasok");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
+                System.out.println("MOVE BIIIIATCCHHHHHHH2222222");
                 user = (String) session.getAttribute("name");
             }
             String userName = null;
@@ -133,7 +128,7 @@
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("Username")) {
+                    if (cookie.getName().equals("name")) {
                         userName = cookie.getValue();
                     }
                     if (cookie.getName().equals("JSESSIONID")) {
@@ -141,6 +136,9 @@
                     }
                 }
             }
+
+
+
         %>
 
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -163,7 +161,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="text-align:right;">
                                 <li><a href="Settings.jsp">Account Settings</a></li>
-                                <li><form action="Logout" method="POST"><button type="submit" value = "Logout" id="logout">Logout</button></form></li>
+                                <li><form action="Logout" method="GET"><button type="submit" value = "Logout" id="logout">Logout</button></form></li>
                                 
                             </ul>
                         </li>

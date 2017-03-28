@@ -128,12 +128,15 @@
     </style>
 
     <body>
-        <%
+                <%
 //allow access only if session exists
             String user = null;
-            if (session.getAttribute("name") == null) {
-                response.sendRedirect("Login.jsp");
+            //System.out.println(session.getAttribute("name"));
+            if (((String)session.getAttribute("name")) == null|| ( (Integer) session.getAttribute("userType")) != 1) {
+                System.out.println("MOVE BIIIIATCCHHHHHHH2222222 pasok");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
+                System.out.println("MOVE BIIIIATCCHHHHHHH2222222");
                 user = (String) session.getAttribute("name");
             }
             String userName = null;
@@ -141,7 +144,7 @@
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("Username")) {
+                    if (cookie.getName().equals("name")) {
                         userName = cookie.getValue();
                     }
                     if (cookie.getName().equals("JSESSIONID")) {
@@ -149,8 +152,9 @@
                     }
                 }
             }
-            
- ArrayList<Product> prodFeatured = ProductServices.retrieveAllProducts();
+
+            ArrayList<Product> prodFeatured = ProductServices.retrieveFeaturedProducts();
+
         %>
 
         <nav class="navbar navbar-default navbar-fixed-top">

@@ -55,7 +55,24 @@ public class Logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        
+ 
+    	//invalidate the session if exists
+    	HttpSession session = request.getSession(false);
+    	System.out.println("User="+session.getAttribute("name"));
+    	if(session != null){
+    		session.invalidate();
+    	}
+    	response.sendRedirect("Login.jsp");
+    
+        
+        response.setHeader("Cache-Control", "no-cache, no-store");
+	response.setHeader("Pragma", "no-cache");
+
+
+        
     }
 
     /**
@@ -70,16 +87,8 @@ public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        /*
-        Cookie[] cookies = request.getCookies();
-    	if(cookies != null){
-    	for(Cookie cookie : cookies){
-    		if(cookie.getName().equals("JSESSIONID")){
-    			System.out.println("JSESSIONID="+cookie.getValue());
-    			break;
-    		}
-    	}
-    	}
+        
+      
     	//invalidate the session if exists
     	HttpSession session = request.getSession(false);
     	System.out.println("User="+session.getAttribute("name"));
@@ -87,17 +96,16 @@ public class Logout extends HttpServlet {
     		session.invalidate();
     	}
     	response.sendRedirect("Login.jsp");
-    }*/
+    
         
-        Cookie[] cookies = request.getCookies();
-for (Cookie cookie : cookies) {
-cookie.setMaxAge(0);
-cookie.setValue(null);
-cookie.setPath("/");
-response.addCookie(cookie);
-}
+        response.setHeader("Cache-Control", "no-cache, no-store");
+	response.setHeader("Pragma", "no-cache");
+
+	
         
-        request.getSession().invalidate();
+    
+        
+        
         response.sendRedirect("Login.jsp");
 
     /**
